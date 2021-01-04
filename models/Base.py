@@ -9,4 +9,9 @@ class Base:
 
     def hit(self):
         self.led.deactivate()
+        self.active = False
         print(f"deactivated led with button on pin {self.button.pin}")
+
+    def activate(self):
+        self.led.activate()
+        self.active = True
