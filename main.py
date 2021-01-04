@@ -4,16 +4,11 @@ import time
 from models.Led import Led
 GPIO.setmode(GPIO.BCM)
 
-led0 = Led([26, 19])
-led1 = Led([13, 6])
-led2 = Led([5, 0])
-led3 = Led([11, 9])
-led4 = Led([10, 22])
-led5 = Led([27, 17])
-led6 = Led([4, 3])
-led7 = Led([2, 14])
-
-leds = [led0,led1,led2,led3,led4,led5,led6,led7]
+leds = [Led([26, 19]), Led([13, 6]), Led([5, 0]), Led([11, 9]), Led([21, 20]), Led([16, 12]), Led([1, 7]), Led([8, 25])]
+buttons = [Button(10), Button(22), Button(27), Button(17), Button(24), Button(23), Button(18), Button(15)]
+bases = []
+for led in leds:
+    bases += Base(led, buttons[leds.index(led)])
 
 
 try:
