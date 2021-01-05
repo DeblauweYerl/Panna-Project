@@ -36,6 +36,11 @@ h3 {
     line-height: 32px;
     margin: 0 0 24px;
 }
+h4{
+    font-size: 12px;
+    line-height: 16px;
+    margin: 0 0 24px;
+}
 
 .player1{
     color: var(--main-color);
@@ -52,15 +57,15 @@ body {
   .c-grid {
     display: grid;
     background-color: var(--main-color);
-    padding: 24px;
+    padding-bottom: 2em;
     opacity: 1;
     width: 95%;
     row-gap: 0.3em;
     border-radius: 25px;
     z-index: 0;
-    grid-gap: 48px;
     justify-self: center;
     align-items: center;
+    justify-content: center;
     margin-left: auto;
     margin-right: auto;
     background-color: var(--secondary-color);
@@ -75,6 +80,7 @@ body {
     width:70vw;
     outline: none;
     border-radius: 100px;
+    margin-bottom: 1em;
 }
 
 .c-button__red {
@@ -84,7 +90,7 @@ body {
     color: #fff;
     padding: 11px 16px;
     line-height: 24px;
-    width: 90%;
+    width:70vw;
     outline: none;
     border-radius: 100px;
 }
@@ -145,7 +151,7 @@ body {
   input[type=text] {
     border: none;
     border-bottom: 2px dotted var(--secondary-color);
-    width: 60%;
+    width: 80%;
   }
 
 .c-header {
@@ -171,6 +177,7 @@ body {
 }
 
 .c-title{
+
     margin-left: 1em;
     margin-right: 1em;
 }
@@ -240,7 +247,7 @@ body {
     color: var(--secondary-color);
     border-radius: 25px;
     font-size: 16px;
-    padding: 12px 24px;
+    padding: 4px 24px;
     row-gap: 16px;
     width: 60vw;
     align-content: center;
@@ -256,7 +263,7 @@ body {
     color: var(--secondary-color);
     border-radius: 25px;
     font-size: 16px;
-    padding: 12px 24px;
+    padding: 4px 24px;
     row-gap: 16px;
     width: 60vw;
     align-content: center;
@@ -390,7 +397,7 @@ padding-bottom: 16px;
         color: var(--secondary-color);
         border-radius: 25px;
         font-size: 16px;
-        padding: 8px 24px;
+        padding: 4px 24px;
         row-gap: 16px;
         width: 400px;
         align-content: center;
@@ -407,7 +414,7 @@ padding-bottom: 16px;
         color: var(--secondary-color);
         border-radius: 25px;
         font-size: 16px;
-        padding: 12px 24px;
+        padding: 4px 24px;
         row-gap: 16px;
         align-content: center;
         
@@ -423,6 +430,17 @@ padding-bottom: 16px;
         outline: none;
         border-radius: 100px;
     
+    }
+    .c-button__red {
+        font-size: 16px;
+        font-weight: 700;   
+        background-color: var(--third-color);
+        color: #fff;
+        padding: 11px 16px;
+        line-height: 24px;
+        width:;
+        outline: none;
+        border-radius: 100px;
     }
     .dropbtn {
         background-color: var(--main-color);
