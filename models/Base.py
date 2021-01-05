@@ -15,3 +15,4 @@ class Base:
     def activate(self):
         self.led.activate()
         self.active = True
+        
