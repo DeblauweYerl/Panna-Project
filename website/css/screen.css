@@ -1,3 +1,22 @@
+
+/*------------------------------------*\
+  #FONTS
+\*------------------------------------*/
+@font-face
+{
+    font-family: "Noto Serif";
+    font-weight: 200;
+    src: url('../fonts/NotoSerif-Regular.ttf')
+}
+
+@font-face
+{
+    font-family: "Noto Serif";
+    font-weight: 600;
+    src: url('../fonts/NotoSerif-Bold.ttf')
+}
+
+
 :root {
     --main-color: #2A324B;
     --secondary-color: #FFFCF7;
@@ -11,6 +30,15 @@
     --focus-shadow: 0 0 0 3px var(--focus-shadow-color);
 
 }
+
+
+html {
+    font-family: "Noto Serif", Helvetica, arial, sans-serif;
+    font-size: 16px;
+    line-height: 32px;
+    font-weight: 200;
+}
+
 h1,
 h2,
 h3 {
@@ -547,8 +575,22 @@ padding-bottom: 16px;
         margin-right: 1em;
         border-radius: 25px;
         margin-bottom: 2em;
-        width: 70vw;
+        width: 400px;
         box-shadow: 0 0 0 1px rgba(0,0,0, 0.05), 0 2px 4px rgba(0,0,0,.075);
         overflow: hidden;
     }
+    .c-button-white {
+        font-size: 16px;
+        font-weight: 700;    
+        background-color: var(--secondary-color);
+        color: var(--main-color);
+        padding: 11px 16px;
+        line-height: 48px;
+        width: 600px;
+        outline: none;
+        border: none;
+        border-radius: 100px;
+        margin-bottom: 1em;
+    }
+    
 }
