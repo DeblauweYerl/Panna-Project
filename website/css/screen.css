@@ -180,17 +180,10 @@ body {
     color: #fff;
     padding: 11px 16px;
     line-height: 24px;
-    width: 500px;
+    width: 70vw;
     outline: none;
     border-radius: 100px;
 }
-
-}
-
-
-
-
-
 
 
 
@@ -259,4 +252,4 @@ padding-bottom: 16px;
         justify-content: center;
         align-items: center;
     }
-    
+}
