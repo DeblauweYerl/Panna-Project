@@ -137,7 +137,7 @@ body {
 
 .align-items{
     position:absolute;                  
-    top:10%;                          
+    top:20%;                          
 }
 
 .align-button{
@@ -172,20 +172,6 @@ body {
     
 }
 
-
-/* vanaf 700 px niet meer breder gaan */
-@media (min-width:700px) { 
-.item {
-    width:600px;
-    height: 100%;
-    border-radius: 25px;
-    background: var(--secondary-color);
-    text-align: center;
-    padding: auto;  
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
 
 .c-button {
     font-size: 16px;
@@ -258,3 +244,19 @@ padding-bottom: 0px;
 padding-top: 16px;
 padding-bottom: 16px;
 }
+
+
+/* vanaf 700 px niet meer breder gaan */
+@media (min-width:700px) { 
+    .item {
+        width:600px;
+        height: 100%;
+        border-radius: 25px;
+        background: var(--secondary-color);
+        text-align: center;
+        padding: auto;  
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    
