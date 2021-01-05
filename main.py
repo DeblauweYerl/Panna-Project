@@ -13,13 +13,22 @@ buttons = [Button(10), Button(22), Button(27), Button(17), Button(24), Button(23
 bases = []
 for led in leds:
     bases += Base(led, buttons[leds.index(led)])
-
+    
+time_score = 0
+playing = False
 
 def timer():
-    start = time.time()
-    elapsed_time = time.time() - start
+    global time_score
+    if playing:
+        start = time.time()
+        time_score = time.time() - start
+        time.sleep(1)
+        print(f"elapsed_time: {time_score}")
+
 
 def singleplayer(total_bases):
+    global playing
+    playing = True
     timer_thread = threading.Thread(target=timer)
     timer_thread.start()
 
@@ -29,6 +38,7 @@ def singleplayer(total_bases):
         current_base.activate()
         current_base.check_for_hit()
         bases_completed += 1
+    playing = False
 
 try:
     while True:
