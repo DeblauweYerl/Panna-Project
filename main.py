@@ -1,5 +1,6 @@
 from RPi import GPIO
 import time
+import random
 
 from models.Led import Led
 GPIO.setmode(GPIO.BCM)
@@ -10,6 +11,14 @@ bases = []
 for led in leds:
     bases += Base(led, buttons[leds.index(led)])
 
+
+def singleplayer(total_bases):
+    bases_completed = 0
+    while(bases_completed <= total_bases):
+        current_base = bases[random.randint(0, 7)]
+        current_base.activate()
+        current_base.check_for_hit()
+        bases_completed += 1
 
 try:
     while True:
