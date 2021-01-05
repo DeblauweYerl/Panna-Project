@@ -2,7 +2,7 @@ from RPi import GPIO
 import time
 import random
 import threading
-
+from database.repositories.Datarepository import DataRepository
 from models.Led import Led
 from models.Button import Button
 from models.Base import Base

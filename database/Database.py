@@ -5,8 +5,8 @@ from pymysql.cursors import DictCursor
 class Database:
     def __init__(self, app, user, password, db, host='localhost', port=3306):
         # MySQL configurations
-        app.config['MYSQL_DATABASE_USER'] = user
-        app.config['MYSQL_DATABASE_PASSWORD'] = password
+        app.config['MYSQL_DATABASE_USER'] = "pi"
+        app.config['MYSQL_DATABASE_PASSWORD'] = "IkWilZelfmoordPlegen456"
         app.config['MYSQL_DATABASE_PORT'] = port
         app.config['MYSQL_DATABASE_DB'] = db
         app.config['MYSQL_DATABASE_HOST'] = host
