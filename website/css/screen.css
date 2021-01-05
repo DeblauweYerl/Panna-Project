@@ -52,13 +52,15 @@ body {
   .c-grid {
     display: grid;
     background-color: var(--main-color);
-    padding: 24px;
+    padding-bottom: 24px;
     opacity: 1;   
-   border-radius: 25px; 
+    row-gap: 0.3em;
+   
+    
+    border-radius: 25px; 
     justify-self: center;
     align-items: center;
-    margin-left: auto;
-    margin-right: auto;
+    
     background-color: var(--secondary-color);
     
     
@@ -70,7 +72,7 @@ body {
     color: #fff;
     padding: 11px 16px;
     line-height: 24px;
-    width: 90%;
+    width:70vw;
     outline: none;
     border-radius: 100px;
 
@@ -103,7 +105,7 @@ body {
 .dropbtn {
     background-color: var(--main-color);
     color: white;
-   
+   width: 70vw;
     padding: 11px 48px;
     font-size: 16px;
     border: none;
@@ -186,23 +188,13 @@ body {
     
   }
   /* vanaf 700 px niet meer breder gaan */
-@media (min-width:700px) { 
-    .item {
-        width:600px;
-        height: 100%;
-        border-radius: 25px;
-        background: var(--secondary-color);
-        text-align: center;
-        padding: auto;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
+
  
 
 .c-rank__uneven {
     display: flex;
     flex-direction: column;
+    grid-gap: 1em;
     flex-wrap: wrap;
     justify-content: flex-start;
     align-items: flex-start;
@@ -212,6 +204,9 @@ body {
     border-radius: 25px;
     font-size: 16px;
     padding: 12px 24px;
+    row-gap: 16px;
+    width: 60vw;
+    align-content: center;
 }
 .c-rank__even {
     display: flex;
@@ -225,16 +220,19 @@ body {
     border-radius: 25px;
     font-size: 16px;
     padding: 12px 24px;
-    
+    row-gap: 16px;
+    width: 60vw;
+    align-content: center;
 }
+
 
   .c-card {
     background-color: var(--third-color);
-    margin-left: 24px;
-    margin-right: 24px;
+    margin-left:1em;
+    margin-right: 1em;
     border-radius: 25px;
-    margin-bottom: 24px;
-    
+    margin-bottom: 2em;
+    width: 70vw;
     box-shadow: 0 0 0 1px rgba(0,0,0, 0.05), 0 2px 4px rgba(0,0,0,.075);
     overflow: hidden;
 }
@@ -251,7 +249,7 @@ body {
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
-    width: 100%;
+    width: 70vw;
     
     background-color: var(--third-color);
     color: var(--secondary-color);
@@ -318,3 +316,85 @@ padding-bottom: 0px;
 padding-top: 16px;
 padding-bottom: 16px;
 }
+
+
+@media (min-width:700px) { 
+    .item {
+        width:600px;
+        height: 100%;
+        border-radius: 25px;
+        background: var(--secondary-color);
+        text-align: center;
+        padding: auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .c-rank__uneven {
+        display: flex;
+        flex-direction: column;
+        grid-gap: 1em;
+        
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        align-items: flex-start;
+        opacity: 1 !important;
+        background-color: var(--main-color);
+        color: var(--secondary-color);
+        border-radius: 25px;
+        font-size: 16px;
+        padding: 8px 24px;
+        row-gap: 16px;
+        width: 400px;
+        align-content: center;
+    }
+    .c-rank__even {
+        width: 400px;
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        align-items: flex-start;
+        opacity: 1 !important;
+        background-color: var(--third-color);
+        color: var(--secondary-color);
+        border-radius: 25px;
+        font-size: 16px;
+        padding: 12px 24px;
+        row-gap: 16px;
+        align-content: center;
+        
+    }
+    .c-button {
+        font-size: 16px;
+        font-weight: 700;    
+        background-color: var(--main-color);
+        color: #fff;
+        padding: 11px 16px;
+        line-height: 24px;
+        width:400px;
+        outline: none;
+        border-radius: 100px;
+    
+    }
+    .dropbtn {
+        background-color: var(--main-color);
+        color: white;
+       width: 400px;
+        padding: 11px 48px;
+        font-size: 16px;
+        border: none;
+        border-radius: 25px;
+      }
+      .c-card {
+        background-color: var(--third-color);
+        margin-left:1em;
+        margin-right: 1em;
+        border-radius: 25px;
+        margin-bottom: 2em;
+        width: 400px;
+        box-shadow: 0 0 0 1px rgba(0,0,0, 0.05), 0 2px 4px rgba(0,0,0,.075);
+        overflow: hidden;
+    }
+   }
