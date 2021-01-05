@@ -11,6 +11,11 @@ class Base:
         self.led.deactivate()
         self.active = False
         print(f"deactivated led with button on pin {self.button.pin}")
+        
+    def check_for_hit(self):
+        status_button = GPIO.input(self.button.pin)
+        while status_button == 0:
+            status_button = GPIO.input(self.button.pin)
 
     def activate(self):
         self.led.activate()
