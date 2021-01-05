@@ -26,7 +26,7 @@ def timer():
         print(f"elapsed_time: {time_score}")
 
 
-def singleplayer(total_bases):
+def singleplayer(total_bases, player_name):
     global playing
     playing = True
     timer_thread = threading.Thread(target=timer)
@@ -40,7 +40,7 @@ def singleplayer(total_bases):
         bases_completed += 1
     playing = False
 
-def multiplayer():
+def multiplayer(player1_name, player2_name):
     for led in leds[0:4]:
         led.activate('red')
     for led in leds[4:8]:
@@ -50,28 +50,36 @@ def multiplayer():
     while(result==" "):
         if bases[0].active==False and bases[1].active==False and bases[2].active==False and bases[3].active==False:
             result="blue"
-    
+            print(f"{player2_name} won!")
         if bases[4].active==False and bases[5].active==False and bases[6].active==False and bases[7].active==False:
             result="red"
+            print(f"{player1_name} won!")
 
 
-def game(gamemode):
-    if gamemode=="multiplayer":
-        name_player1=str(input("Whats the name of player 1 \n"))
-        name_player2=str(input("Whats the name of player 2 \n"))
-        mp = threading.Thread(target=multiplayer)
+def game(gamemode, difficulty="easy"):
+    if gamemode == "mp":
+        player1_name = str(input("Whats the name of player 1 \n"))
+        player2_name = str(input("Whats the name of player 2 \n"))
+        mp = threading.Thread(target=multiplayer, args=[player1_name, player2_name])
         mp.start()
-    if gamemode=="singleplayer":
-        name_player1=str(input("Whats the name of the player \n"))
-        sp = threading.Thread(target=singleplayer)
+    if gamemode == "sp":
+        player_name = str(input("Whats the name of the player \n"))
+        if difficulty == "easy":
+            sp = threading.Thread(target=singleplayer, args=[10, player_name])
+        if difficulty == "normal":
+            sp = threading.Thread(target=singleplayer, args=[15, player_name])
+        if difficulty == "hard":
+            sp = threading.Thread(target=singleplayer, args=[20, player_name])
         sp.start()
-
-   
-
 
 
 try:
-    game("multiplayer")
+    while True:
+        gamemode = input("sp of mp?: ")
+        difficulty = ""
+        if gamemode == 'sp':
+            difficulty = input("easy, normal of hard?: ")
+        game(gamemode, difficulty)
 
 except KeyboardInterrupt:
     print("\nManually stopped program")
