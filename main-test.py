@@ -8,13 +8,12 @@ from models.Button import Button
 from models.Base import Base
 GPIO.setmode(GPIO.BCM)
 
-leds = [Led([26, 19]), Led([13, 6]), Led([5, 0]), Led([11, 9]), Led([21, 20]), Led([16, 12]), Led([1, 7]), Led([8, 25])]
-buttons = [Button(10), Button(22), Button(27), Button(17), Button(24), Button(23), Button(18), Button(15)]
+leds = [Led([26, 19]), Led([13, 6]), Led([21, 20]), Led([16, 12])]
+buttons = [Button(10), Button(22), Button(24), Button(23)]
 bases = []
-
 for led in leds:
+    GPIO.output(led.pins, 0)
     bases.append(Base(led, buttons[leds.index(led)]))
-deactivate_all_bases()
     
 time_score = 0
 playing = 0
@@ -34,7 +33,7 @@ def singleplayer(total_bases, player_name):
 
     bases_completed = 0
     while(bases_completed <= total_bases):
-        current_base = bases[random.randint(0, 7)]
+        current_base = bases[random.randint(0, 3)]
         current_base.activate()
         current_base.check_for_hit()
         bases_completed += 1
@@ -43,17 +42,18 @@ def singleplayer(total_bases, player_name):
 
 def multiplayer(player1_name, player2_name):
     global playing
-    for base in bases[0:4]:
+    for base in bases[0:2]:
         base.activate('red')
-    for base in bases[4:7]:
+    for base in bases[2:4]:
         base.activate('blue')
 
     result = " "
-    while(result==" "):
-        if bases[0].active==False and bases[1].active==False and bases[2].active==False and bases[3].active==False:
+            
+    while result == " ":
+        if bases[0].active==False and bases[1].active==False:
             result="blue"
             print(f"{player2_name} won!")
-        if bases[4].active==False and bases[5].active==False and bases[6].active==False and bases[7].active==False:
+        if bases[2].active==False and bases[3].active==False:
             result="red"
             print(f"{player1_name} won!")
     playing = False
