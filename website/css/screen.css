@@ -1,5 +1,3 @@
-
-
 :root {
     --main-color: #2A324B;
     --secondary-color: #FFFCF7;
@@ -37,8 +35,8 @@ h3 {
     margin: 0 0 24px;
 }
 h4{
-    font-size: 12px;
-    line-height: 16px;
+    font-size: 100px;
+    line-height: 100px;
     margin: 0 0 24px;
 }
 
@@ -99,6 +97,20 @@ body {
 .c-button:active {
     background-color: var(--main-color-dark);
     box-shadow: none;
+}
+
+.c-square-red{
+    color: var(--secondary-color);
+    background-color: var(--third-color);
+    padding: 3% 14%;
+    border-radius: 25px;
+}
+
+.c-square-blue{
+    color: var(--secondary-color);
+    background-color: var(--main-color);
+    padding: 3% 14%;
+    border-radius: 25px;
 }
 
 
@@ -197,7 +209,7 @@ body {
 
 .align-items{
     position:absolute;                  
-    top:20%;                          
+    top:15%;               
 }
 
 .align-button{
@@ -205,8 +217,14 @@ body {
     bottom: 1em; 
     right: 6%;
     left: 6%;
+    margin-left: auto;
+    margin-right: auto;
 }
 
+.align-content-center{
+    display: flex;
+    justify-content: center;
+}
 
 
 .container {
@@ -218,6 +236,16 @@ body {
     grid-gap: 1.5em;
     margin-top: 1em;
   }
+.container-for-3{
+    display: grid;
+    height: 85vh;
+    grid-template-rows: auto;
+    justify-items: center;
+    background: var(--main-color);
+    grid-gap: 1.5em;
+    margin-top: 1em;
+}
+
 
 .item {
     width:90%;
@@ -270,8 +298,19 @@ body {
 }
 
 
-  .c-card {
+.c-card {
     background-color: var(--third-color);
+    margin-left:1em;
+    margin-right: 1em;
+    border-radius: 25px;
+    margin-bottom: 2em;
+    width: 70vw;
+    box-shadow: 0 0 0 1px rgba(0,0,0, 0.05), 0 2px 4px rgba(0,0,0,.075);
+    overflow: hidden;
+}
+
+.c-card-dark {
+    background-color: var(--main-color);
     margin-left:1em;
     margin-right: 1em;
     border-radius: 25px;
@@ -289,12 +328,12 @@ body {
     color: var(--secondary-color);
 }
 
+
 .c-input {
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
     width: 70vw;
-    
     background-color: var(--third-color);
     color: var(--secondary-color);
     font-family: inherit;
@@ -303,7 +342,22 @@ body {
     padding: 11px 16px 4px 16px;
     outline: none;
     border-color: var(--secondary-color);
-   
+}
+
+
+.c-input-dark {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    width: 70vw;
+    background-color: var(--main-color);
+    color: var(--secondary-color);
+    font-family: inherit;
+    font-size: 16px;
+    line-height: 16px;
+    padding: 11px 16px 4px 16px;
+    outline: none;
+    border-color: var(--secondary-color);
 }
 
 
@@ -316,8 +370,34 @@ body {
     line-height: 24px;
     width: 70vw;
     outline: none;
+    border: none;
     border-radius: 100px;
 }
+
+.c-button-white {
+    font-size: 16px;
+    font-weight: 700;    
+    background-color: var(--secondary-color);
+    color: var(--main-color);
+    padding: 11px 16px;
+    line-height: 24px;
+    width: 90vw;
+    outline: none;
+    border: none;
+    border-radius: 100px;
+    margin-bottom: 1em;
+}
+
+.c-troffee{
+    margin-top: 20%;
+}
+
+
+
+
+
+
+
 
 .o-section {
     display: flex;
@@ -438,7 +518,7 @@ padding-bottom: 16px;
         color: #fff;
         padding: 11px 16px;
         line-height: 24px;
-        width:;
+        width:400px;
         outline: none;
         border-radius: 100px;
     }
@@ -451,7 +531,7 @@ padding-bottom: 16px;
         border: none;
         border-radius: 25px;
       }
-      .c-card {
+    .c-card {
         background-color: var(--third-color);
         margin-left:1em;
         margin-right: 1em;
@@ -461,5 +541,14 @@ padding-bottom: 16px;
         box-shadow: 0 0 0 1px rgba(0,0,0, 0.05), 0 2px 4px rgba(0,0,0,.075);
         overflow: hidden;
     }
-   
+    .c-card-dark {
+        background-color: var(--main-color);
+        margin-left:1em;
+        margin-right: 1em;
+        border-radius: 25px;
+        margin-bottom: 2em;
+        width: 70vw;
+        box-shadow: 0 0 0 1px rgba(0,0,0, 0.05), 0 2px 4px rgba(0,0,0,.075);
+        overflow: hidden;
+    }
 }
