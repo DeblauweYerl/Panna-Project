@@ -15,7 +15,3 @@ class Base:
     def activate(self):
         self.led.activate()
         self.active = True
-        
-    def activate(self, color):
-        self.led.activate(color)
-        self.active = True

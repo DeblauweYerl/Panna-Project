@@ -24,6 +24,34 @@ def timer():
         time_score = time.time() - start
         time.sleep(1)
         print(f"elapsed_time: {time_score}")
+def multiplayer():
+    for led in leds[0:4]:
+        led.activate("red")
+    for led in leds[4:8]:
+        led.activate("blue")
+    result=" "
+    while(result==" "):
+        if bases[0].active==False and bases[1]==False and bases[2]==False and bases[3]==False:
+            result="blue"
+    
+        if bases[4]==False and bases[5]==False and bases[6]==False and bases[7]==False:
+            result="red"
+    
+      
+
+def game(gamemode):
+    if gamemode=="Multiplayer":
+        name_player1=str(input("Whats the name of player 1 \n"))
+        name_player2=str(input("Whats the name of player 2 \n"))
+        mp = threading.Thread(target=multiplayer)
+        mp.start()
+    if gamemode=="Singleplayer":
+        name_player1=str(input("Whats the name of the player \n"))
+        sp = threading.Thread(target=singleplayer)
+        sp.start()
+
+   
+
 
 
 def singleplayer(total_bases):
@@ -41,8 +69,7 @@ def singleplayer(total_bases):
     playing = False
 
 try:
-    while True:
-        pass
+    game(gamemode)
 
 except KeyboardInterrupt:
     print("\nManually stopped program")
