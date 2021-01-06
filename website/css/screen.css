@@ -119,7 +119,7 @@ body {
   
   /* Style the active class, and buttons on mouse-over */
   .active, .btn:hover {
-    background-color: var(--main-color-dark);
+    background-color: var(--third-color);
     color: white;
   }
 
@@ -128,15 +128,15 @@ body {
     font-weight: 700;    
     background-color: var(--main-color);
     color: #fff;
-    padding: 11px 16px;
-    line-height: 24px;
-    width:27vw;
+    padding: 4px 6px;
+    line-height: 12px;
+    width:22vw;
     outline: none;
     border-radius: 100px;
     margin-bottom: 1em;
 }
 .active {
-    background-color: var(--main-color-dark);
+    background-color: var(--third-color);
     color: white;
   }
 
@@ -171,6 +171,7 @@ body {
     padding: 3% 14%;
     border-radius: 25px;
 }
+
 
 
 /* Dropdown Button */
@@ -629,7 +630,7 @@ padding-bottom: 16px;
         background-color: var(--main-color);
         color: #fff;
         padding: 11px 16px;
-        line-height: 24px;
+        line-height: 12px;
         width:133px;
         outline: none;
         border-radius: 100px;
