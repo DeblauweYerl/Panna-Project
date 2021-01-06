@@ -21,9 +21,8 @@ playing = 0
 def timer():
     global time_score
     while playing:
-        start = time.time()
-        time_score = time.time() - start
-        time.sleep(0.5)
+        start = round(time.time(), 8)
+        time_score = round(time.time(), 8) - start
 
 
 def singleplayer(total_bases, player_name):
