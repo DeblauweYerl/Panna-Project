@@ -10,7 +10,7 @@ class Database:
         try:
             db = connector.connect(
                 option_files=os.path.abspath(os.path.join(
-                    os.path.dirname(__file__), "../config.py")),
+                    os.path.dirname(__file__), "database\config.py")),
                 autocommit=False
             )
             if "AttributeError" in(str(type(db))):
