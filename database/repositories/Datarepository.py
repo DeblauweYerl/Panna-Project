@@ -24,10 +24,15 @@ class DataRepository:
     def read_scoreboard_hard():
         sql = "SELECT DISTINCT PlayerName, Time FROM tblGame WHERE Difficulty = 2 ORDER BY Time DESC"
         return Database.get_rows(sql)
+        
+    @staticmethod
+    def read_scoreboard_hard():
+        sql = "SELECT DISTINCT PlayerName, Time FROM tblGame WHERE Difficulty = 2 ORDER BY Time DESC"
+        return Database.get_rows(sql)
 
 
     @staticmethod
-    def insert_measurement(timestamp, player_name, difficulty, time):
+    def insert_game(timestamp, player_name, difficulty, time):
         sql = "INSERT INTO tblGame VALUES (%s,%s,%s,%s)"
         params = [timestamp, player_name, difficulty, time]
         return Database.execute_sql(sql, params)
