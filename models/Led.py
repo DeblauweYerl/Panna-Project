@@ -6,11 +6,11 @@ class Led:
             GPIO.setup(pin, GPIO.OUT)
         self.pins = pins
 
-    def activate(color):
+    def activate(self, color='red'):
         if color == "red":
             GPIO.output(self.pins[0], 1)
         if color == "blue":
             GPIO.output(self.pins[1], 1)
 
-    def deactivate():
+    def deactivate(self):
         GPIO.output(self.pins, 0)
