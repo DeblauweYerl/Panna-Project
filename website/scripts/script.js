@@ -1,5 +1,21 @@
 'use strict';
 let naam, button;
+const lanIP = `${window.location.hostname}:5000`;
+const socketio = io(lanIP);
+
+
+
+const loadSocketListeners = function () {
+    socketio.on("message",function(msg){
+     print("printing message from backend")
+     document.querySelector('.js-messages').innerHTML+= `${msg}<br>`;
+    });
+    socketio.on('B2F_client_connected',function(msg){
+      print(`Server Responded:${msg}`)
+      
+    });
+  
+  };
 
 const checkValues = function () {
     console.log('kiesak');
