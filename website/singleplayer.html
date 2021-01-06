@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <link rel="stylesheet" href="css/screen.css">
-
+    <script src="scripts/script.js"></script>
     <title>Panna 360</title>
 </head>
 <body>
@@ -15,15 +15,12 @@
     <div class="container">
         <div class="item player1">
             <div>
-                <div class="dropdown">
-                    <h3 >Moeilijkheidsgraad:</h3>
-                    <button class="dropbtn">Moeilijkheidsgraad</button>
-                    <div class="dropdown-content">
-                      <a href="#">Makkelijk</a>
-                      <a href="#">Gemiddeld</a>
-                      <a href="#">Moeilijk</a>
-                    </div>
-                </div>
+                <h3 >Moeilijkheidsgraad:</h3>
+              
+                <div id="myDIV"> 
+                    <button class="btn c-button__little ">Makkelijk</button>
+                    <button class="btn c-button__little" >Gemiddeld</button>
+                    <button class="btn c-button__little">Moeilijk</button></div>
 
                   <form class="c-card">
                     <p >
@@ -36,7 +33,7 @@
                     
                   </form>
 
-                <button class="c-button" onclick="location.href='singleplayerGame.html';">Start game</button>
+                <input type="button"  class= "btn c-button" onclick="location.href='singleplayerGame.html';" value="Start game"/>
             </div>   
         </div>
 
@@ -52,7 +49,7 @@
                             <div class="c-rank__even">4 Bob Peeters 0:24:30 </div>
      
                 </div>                             
-            <button class="c-button" onclick="location.href='scorebord.html';">Volledig scorebord</button>
+            <button class="btn c-button" onclick="location.href='scorebord.html';">Volledig scorebord</button>
               
             </div>
         </div>

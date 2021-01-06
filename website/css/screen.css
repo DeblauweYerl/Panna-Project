@@ -103,11 +103,42 @@ body {
     color: #fff;
     padding: 11px 16px;
     line-height: 24px;
-    width:70vw;
+    width:23vw;
     outline: none;
     border-radius: 100px;
     margin-bottom: 1em;
 }
+.btn {
+    border: none;
+    outline: none;
+    padding: 10px 16px;
+    background-color: #f1f1f1;
+    cursor: pointer;
+    font-size: 18px;
+  }
+  
+  /* Style the active class, and buttons on mouse-over */
+  .active, .btn:hover {
+    background-color: var(--main-color-dark);
+    color: white;
+  }
+
+.c-button__little {
+    font-size: 12px;
+    font-weight: 700;    
+    background-color: var(--main-color);
+    color: #fff;
+    padding: 11px 16px;
+    line-height: 24px;
+    width:27vw;
+    outline: none;
+    border-radius: 100px;
+    margin-bottom: 1em;
+}
+.active {
+    background-color: var(--main-color-dark);
+    color: white;
+  }
 
 .c-button__red {
     font-size: 16px;
@@ -328,8 +359,8 @@ body {
 
 .c-card {
     background-color: var(--third-color);
-    margin-left:1em;
-    margin-right: 1em;
+    margin-left: auto;
+    margin-right: auto;
     border-radius: 25px;
     margin-bottom: 2em;
     width: 70vw;
@@ -591,6 +622,18 @@ padding-bottom: 16px;
         border: none;
         border-radius: 100px;
         margin-bottom: 1em;
+    }
+    .c-button__little {
+        font-size: 12px;
+        font-weight: 700;    
+        background-color: var(--main-color);
+        color: #fff;
+        padding: 11px 16px;
+        line-height: 24px;
+        width:133px;
+        outline: none;
+        border-radius: 100px;
+        margin-bottom: 2em;
     }
     
 }
