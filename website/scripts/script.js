@@ -8,11 +8,11 @@ const socketio = io(lanIP);
 const loadSocketListeners = function () {
     console.log("done")
     socketio.on("message",function(msg){
-     print("printing message from backend")
+     console.log("printing message from backend")
      document.querySelector('.js-messages').innerHTML+= `${msg}<br>`;
     });
     socketio.on('B2F_client_connected',function(msg){
-      print(`Server Responded:${msg}`)
+      console.log(`Server Responded:${msg}`)
       
     });
   
