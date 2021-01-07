@@ -12,17 +12,11 @@ def connect_message():
     clientid="kaka"
     emit("B2F_client_connected", clientid, broadcast=False) #Broadcast=True -> Naar alle clients word de boodschap gestuurd
     #Broadcasr=False -> Er word geen boodschap gestuurd naar alle clients
+
 @socketio.on('F2B_start_singleplayer')
-def handle_message():
-    print("test")
-
-
-@socketio.on('F2B_Like')
-def like():
-    print(f"er word een like aangevraagd")
-    send(":dumb:", broadcast=True) #Broadcast=True -> Naar alle clients word de boodschap gestuurd
-    #Broadcasr=False -> Er word geen boodschap gestuurd naar alle clients
-
+def handle_message(json):
+    data= json['sp_naam']
+    print(data)
 
 
 if __name__ == '__main__':
