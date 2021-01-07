@@ -1,6 +1,6 @@
 'use strict';
 let naam, button;
-const lanIP = `${window.location.hostname}:5500`;
+const lanIP = `${window.location.hostname}:5010`;
 const socketio = io(lanIP);
 
 
