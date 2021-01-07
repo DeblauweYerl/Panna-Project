@@ -2,6 +2,20 @@
 let naam, button;
 const lanIP = `${window.location.hostname}:5010`; //ip adres automatisch opvragen met ${window.location.hostname}
 const socketio = io(lanIP);
+let btn_start_singleplayer, singleplayer_naam, moeilijkheidgraad;
+
+
+
+
+const listenToClick=function(){
+    btn_start_singleplayer.addEventListener("click", function() {
+    console.log("singleplayer starten");
+    singleplayer_naam= document.querySelector(".js_singleplayer_naam").value;
+    
+    // moeilijkheidgraad=
+    socket.emit("F2B_start_singleplayer", {naam: singleplayer_naam});
+    })
+}
 
 
 
@@ -15,35 +29,32 @@ const loadSocketListeners = function () {
       console.log(`Server Responded:${msg}`)
       
     });
-  
-  };
+};
 
 const checkValues = function () {
     console.log('kiesak');
   
-        if (naam.value.length >0 && naam.value.length <= 14) {
-            button.disabled = false;
-        } else {
-            button.disabled = true;
-        }
-    
-    };
+    if (naam.value.length >0 && naam.value.length <= 14) {
+        button.disabled = false;
+        listenToClick()
+    } else {
+        button.disabled = true;
+    }
+};
 
-    const eventListenersToevoegen = function () {
-        naam.addEventListener('input', checkValues);
-     
-    };
+const eventListenersToevoegen = function () {
+    naam.addEventListener('input', checkValues);
+};
 
+const init = function () {
+    naam = document.querySelector('#name');
+    button = document.querySelector('input[type=button]');
+    loadSocketListeners()
+    button.disabled = 'disabled';
+    eventListenersToevoegen();
+};
 
-
-    const init = function () {
-        naam = document.querySelector('#name');
-        button = document.querySelector('input[type=button]');
-        loadSocketListeners()
-        button.disabled = 'disabled';
-        eventListenersToevoegen();
-    };
-
-    document.addEventListener('DOMContentLoaded', function () {
-        init();
-    });
+document.addEventListener('DOMContentLoaded', function () {
+    init();
+    btn_start_singleplayer = document.querySelector('.js-start-singleplayer');
+});
