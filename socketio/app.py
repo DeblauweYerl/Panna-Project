@@ -1,8 +1,9 @@
 from flask import Flask, render_template, json, request
 from flask_socketio import SocketIO,send,emit
 
-app = Flask(__name__)
 
+app = Flask(__name__)
+app.config['SECRET_KEY']="mysecret"
 socketio=SocketIO(app, cors_allowed_origins='*')
 
 @socketio.on('connect')
@@ -26,4 +27,4 @@ def like():
 
 
 if __name__ == '__main__':
-    socketio.run(app,host="0.0.0.0",port=5000, debug=True)
+    socketio.run(app,host="127.0.0.1",port=5000, debug=True)
