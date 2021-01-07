@@ -1,11 +1,12 @@
 'use strict';
 let naam, button;
-const lanIP = `${window.location.hostname}:5000`;
+const lanIP = `${window.location.hostname}:5500`;
 const socketio = io(lanIP);
 
 
 
 const loadSocketListeners = function () {
+    console.log("done")
     socketio.on("message",function(msg){
      print("printing message from backend")
      document.querySelector('.js-messages').innerHTML+= `${msg}<br>`;
@@ -38,7 +39,7 @@ const checkValues = function () {
     const init = function () {
         naam = document.querySelector('#name');
         button = document.querySelector('input[type=button]');
-    
+        loadSocketListeners()
         button.disabled = 'disabled';
         eventListenersToevoegen();
     };
