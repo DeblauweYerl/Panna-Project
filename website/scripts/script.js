@@ -10,9 +10,11 @@ const listenToClick=function(){
     btn_start_singleplayer.addEventListener("click", function() {
     console.log("singleplayer starten");
     singleplayer_naam= document.querySelector(".js_singleplayer_naam").value;
-      
+    
+    
     // moeilijkheidgraad=
     socketio.emit("F2B_start_singleplayer", {sp_naam: singleplayer_naam});
+    setTimeout(1000);
     })
 }
 
