@@ -1,6 +1,6 @@
 'use strict';
 let naam, button;
-const lanIP = `${window.location.hostname}:5000`; //ip adres automatisch opvragen met ${window.location.hostname}
+const lanIP = `${window.location.hostname}:5010`; //ip adres automatisch opvragen met ${window.location.hostname}
 const socketio = io(lanIP);
 
 
