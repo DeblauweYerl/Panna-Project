@@ -24,15 +24,17 @@
                 </div>
 
                 <div class="align-top-screen">
-                    <h3 >Moeilijkheidsgraad:</h3>
-              
-                    <div id="myDIV"> 
-                        <button class="btn c-button__little ">Makkelijk</button>
-                        <button class="btn c-button__little" >Gemiddeld</button>
-                        <button class="btn c-button__little">Moeilijk</button>
+                    <div class="dropdown">
+                        <h3>Moeilijkheidsgraad:</h3>
+                        <button class="dropbtn">Moeilijkheidsgraad</button>
+                        <div class="dropdown-content">
+                          <a href="#">Makkelijk</a>
+                          <a href="#">Gemiddeld</a>
+                          <a href="#">Moeilijk</a>
+                        </div>
                     </div>
 
-                    <form class="c-card">
+                    <form class="c-card"> 
                         <p >
                             <label class="c-label " for="name">
                                 NAAM SPELER
@@ -43,16 +45,13 @@
 
                     <input type="button"  class= "btn c-button js-start-singleplayer" onclick="location.href='singleplayerGame.html';" value="Start game"/>
                 </div>
-                
             </div>   
         </div>
-
 
         <div class="item player1">
             <div>
                 <div class="c-grid">
-                    <h3>Top players</h3>
-                        
+                    <h3>Top players</h3> 
                     <div>
                         <table>
                             <TBody class="small-table-body">
@@ -195,9 +194,7 @@
                 <div class="align-button">
                     <button class="btn c-button " onclick="location.href='scorebord.html';">Volledig scorebord</button>
                 </div>
-            
             </div>
         </div>
     </div>  
-    
 </body>
