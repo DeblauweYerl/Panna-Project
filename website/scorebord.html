@@ -3,32 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/3.0.5/socket.io.js" integrity="sha512-2rUSTSAeOO02jF6eBqENNqPs1EohenJ5j+1dgDPdXSLz9nOlrr8DJk4zW/lDy8rjhGCSonW3Gx812XJQIKZKJQ==" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="css/screen.css">
 
     <title>Panna 360</title>
 </head>
 <body>
-  
-
-
     <div class="container">
-        <div class="item player1">
+        <div class="item player1 align-base">
             <div>
+                <div class="align-arrow">
+                    <!-- code for arrow -->
+                    <svg onclick="location.href='singleplayer.html';" id="Page-1" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
+                        <g id="Core" transform="translate(-424 -4)">
+                          <g id="arrow-back" transform="translate(424 4)">
+                            <path id="Shape" d="M16,7H3.8L9.4,1.4,8,0,0,8l8,8,1.4-1.4L3.8,9H16V7Z" fill="#2a324b" fill-rule="evenodd"/>
+                          </g>
+                        </g>
+                    </svg>
+                </div>
                 <h1 class="c-title">Scorebord</h1>
                 <div><h3 >Moeilijkheidsgraad:</h3>
               
                     <div>
-                        <button class="c-button__little">Makkelijk</button>
-                        <button class="c-button__little" >Gemiddeld</button>
-                        <button class="c-button__little">Moeilijk</button>
+                        <button class="btn c-button__little">Makkelijk</button>
+                        <button class="btn c-button__little" >Gemiddeld</button>
+                        <button class="btn c-button__little">Moeilijk</button>
                     </div>
                 </div>  
         
-        
-                <div class="c-grid">
-                        
-                            <div class="c-rank__uneven">1 Bob Peeters 0:24:30 </div>
+                <div class="c-grid">       
+                            <!-- <div class="c-rank__uneven">1 Bob Peeters 0:24:30 </div>
                             <div class="c-rank__even">2 Bob Peeters 0:24:30 </div>
                             <div class="c-rank__uneven">3 Bob Peeters 0:24:30 </div>
                             <div class="c-rank__even">4 Bob Peeters 0:24:30 </div>
@@ -37,11 +42,148 @@
                             <div class="c-rank__uneven">7 Bob Peeters 0:24:30 </div>
                             <div class="c-rank__even">8 Bob Peeters 0:24:30 </div>
                             <div class="c-rank__uneven">9 Bob Peeters 0:24:30 </div>
-                            <div class="c-rank__even">10 Bob Peeters 0:24:30 </div>
-     
+                            <div class="c-rank__even">10 Bob Peeters 0:24:30 </div> -->
+                            <div>
+                                <table>
+                                    <TBody>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>Bob Peeters</td>
+                                            <td>0:24:30</td>
+                                          </tr>
+                                          <tr>
+                                              <td>1</td>
+                                              <td>Bob Peeters</td>
+                                              <td>0:24:30</td>
+                                          </tr>
+                                          <tr>
+                                              <td>1</td>
+                                              <td>Bob Peeters</td>
+                                              <td>0:24:30</td>
+                                          </tr>
+                                          <tr>
+                                              <td>1</td>
+                                              <td>Bob Peeters</td>
+                                              <td>0:24:30</td>
+                                          </tr>
+                                          <tr>
+                                              <td>1</td>
+                                              <td>Bob Peeters</td>
+                                              <td>0:24:30</td>
+                                          </tr>
+                                          <tr>
+                                              <td>1</td>
+                                              <td>Bob Peeters</td>
+                                              <td>0:24:30</td>
+                                          </tr>
+                                          <tr>
+                                              <td>1</td>
+                                              <td>Bob Peeters</td>
+                                              <td>0:24:30</td>
+                                          </tr>
+                                          <tr>
+                                              <td>1</td>
+                                              <td>Bob Peeters</td>
+                                              <td>0:24:30</td>
+                                          </tr>
+                                          <tr>
+                                              <td>1</td>
+                                              <td>Bob Peeters</td>
+                                              <td>0:24:30</td>
+                                          </tr>
+                                          <tr>
+                                              <td>1</td>
+                                              <td>Bob Peeters</td>
+                                              <td>0:24:30</td>
+                                          </tr>
+                                          <tr>
+                                              <td>1</td>
+                                              <td>Bob Peeters</td>
+                                              <td>0:24:30</td>
+                                          </tr>
+                                          
+                                          <tr>
+                                              <td>1</td>
+                                              <td>Bob Peeters</td>
+                                              <td>0:24:30</td>
+                                          </tr>
+                                          
+                                          <tr>
+                                              <td>1</td>
+                                              <td>Bob Peeters</td>
+                                              <td>0:24:30</td>
+                                          </tr>
+                                          
+                                          <tr>
+                                              <td>1</td>
+                                              <td>Bob Peeters</td>
+                                              <td>0:24:30</td>
+                                          </tr>
+                                          <tr>
+                                              <td>1</td>
+                                              <td>Bob Peeters</td>
+                                              <td>0:24:30</td>
+                                          </tr>
+                                          <tr>
+                                              <td>1</td>
+                                              <td>Bob Peeters</td>
+                                              <td>0:24:30</td>
+                                          </tr>
+                                          <tr>
+                                              <td>1</td>
+                                              <td>Bob Peeters</td>
+                                              <td>0:24:30</td>
+                                          </tr>
+                                          <tr>
+                                              <td>1</td>
+                                              <td>Bob Peeters</td>
+                                              <td>0:24:30</td>
+                                          </tr>
+                                          <tr>
+                                              <td>1</td>
+                                              <td>Bob Peeters</td>
+                                              <td>0:24:30</td>
+                                          </tr>
+                                          <tr>
+                                              <td>1</td>
+                                              <td>Bob Peeters</td>
+                                              <td>0:24:30</td>
+                                          </tr>
+                                          <tr>
+                                              <td>1</td>
+                                              <td>Bob Peeters</td>
+                                              <td>0:24:30</td>
+                                          </tr>
+                                          <tr>
+                                              <td>1</td>
+                                              <td>Bob Peeters</td>
+                                              <td>0:24:30</td>
+                                          </tr>
+                                          <tr>
+                                              <td>1</td>
+                                              <td>Bob Peeters</td>
+                                              <td>0:24:30</td>
+                                          </tr>
+                                          <tr>
+                                              <td>1</td>
+                                              <td>Bob Peeters</td>
+                                              <td>0:24:30</td>
+                                          </tr>
+                                          <tr>
+                                              <td>1</td>
+                                              <td>Bob Peeters</td>
+                                              <td>0:24:30</td>
+                                          </tr>
+                                          <tr>
+                                              <td>1</td>
+                                              <td>Bob Peeters</td>
+                                              <td>0:24:30</td>
+                                          </tr>
+                                    </TBody>
+                                  </table>
+                            </div>
                 </div>                             
            
-            
             </div>
         </div>  
     </div>  
