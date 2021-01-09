@@ -16,6 +16,17 @@
     src: url('../fonts/NotoSerif-Bold.ttf')
 }
 
+@keyframes fadeOut {
+    0% {opacity:1;}
+    100% {opacity:0.4;}
+
+    }
+
+    @keyframes fadeIn {
+        0% {opacity:0.4;}
+        100% {opacity:1;}
+    
+        }
 
 :root {
     --main-color: #2A324B;
@@ -115,6 +126,15 @@ body {
     background-color: #f1f1f1;
     cursor: pointer;
     font-size: 18px;
+}
+
+.fadeout{
+    -webkit-animation: fadeOut ease 2s;
+}
+
+
+.fadein{
+    -webkit-animation: fadeIn ease 2s; 
 }
   
 /* Style the active class, and buttons on mouse-over */
