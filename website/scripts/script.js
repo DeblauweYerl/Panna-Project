@@ -6,15 +6,15 @@ let btn_start_singleplayer, singleplayer_naam, moeilijkheidgraad;
 
 
 
-
 const listenToClick=function(){
     btn_start_singleplayer.addEventListener("click", function() {
     console.log("singleplayer starten");
     singleplayer_naam= document.querySelector(".js_singleplayer_naam").value;
     
-    // moeilijkheidgraad=
-    console.log("zend")
     
+    // moeilijkheidgraad=
+    socketio.emit("F2B_start_singleplayer", {sp_naam: singleplayer_naam});
+    setTimeout(1000);
     })
 }
 
@@ -28,8 +28,6 @@ const loadSocketListeners = function () {
     });
     socketio.on('B2F_client_connected',function(msg){
       console.log(`Server Responded:${msg}`)
-      socketio.emit("F2B_Like");
-     
       
     });
 };
