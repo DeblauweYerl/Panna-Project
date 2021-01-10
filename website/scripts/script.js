@@ -2,23 +2,21 @@
 let naam, button;
 const lanIP = `${window.location.hostname}:5010`; //ip adres automatisch opvragen met ${window.location.hostname}
 const socketio = io(lanIP);
-let btn_start_singleplayer, singleplayer_naam, moeilijkheidgraad;
+let btn_start_singleplayer, singleplayer_naam, singleplayer_moeilijkheidgraad;
 
 
 
 const listenToClick=function(){
     btn_start_singleplayer.addEventListener("click", function() {
+    //delay om click event maar 1 data maar 1 keer door te sturen
+    setTimeout(1000);
     console.log("singleplayer starten");
     singleplayer_naam= document.querySelector(".js_singleplayer_naam").value;
-    
-    
-    // moeilijkheidgraad=
-    socketio.emit("F2B_start_singleplayer", {sp_naam: singleplayer_naam});
-    setTimeout(1000);
+    singleplayer_moeilijkheidgraad= document.getElementById("js-singleplayer-select").options[document.getElementById("js-singleplayer-select").selectedIndex].value;;
+    socketio.emit("F2B_start_singleplayer", {sp_naam: singleplayer_naam, sp_moeilijkheidsgraad: singleplayer_moeilijkheidgraad});
+    console.log(singleplayer_moeilijkheidgraad);
     })
 }
-
-
 
 const loadSocketListeners = function () {
     console.log("done")
@@ -33,8 +31,6 @@ const loadSocketListeners = function () {
 };
 
 const checkValues = function () {
-    console.log('kiesak');
-  
     if (naam.value.length >0 && naam.value.length <= 14) {
         button.disabled = false;
         listenToClick()

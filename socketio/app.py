@@ -14,10 +14,11 @@ def connect_message():
     #Broadcasr=False -> Er word geen boodschap gestuurd naar alle clients
 
 @socketio.on('F2B_start_singleplayer')
-def handle_message(json):
-    data= json['sp_naam']
-    print(data)
-
+def handle_message(data):
+    naam= data['sp_naam']
+    print(naam)
+    moeilijkheidsgraad = data['sp_moeilijkheidsgraad']
+    print(moeilijkheidsgraad)
 
 if __name__ == '__main__':
     socketio.run(app,host="127.0.0.1",port=5010, debug=True)
