@@ -43,6 +43,10 @@ def start_singleplayer(player_name, difficulty):
 def start_multiplayer(player1_name, player2_name):
     multiplayer(player1_name, player2_name)
 
+@socketio.on('F2B_request_scoreboard')
+def request_scoreboard(gamemode, difficulty):
+    data = DataRepository.read_scoreboard(difficulty)
+    #verstuur data naar client die de request gedaan heeft (nog keer opzoeken hoe da moet)
 
 
 
