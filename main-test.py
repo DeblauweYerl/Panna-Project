@@ -4,11 +4,15 @@ import random
 import threading
 from datetime import datetime
 from datetime import timedelta
+from flask import Flask, render_template, json, request, jsonify
+from flask_socketio import SocketIO,send,emit
+from flask_cors import CORS
 
 from models.Led import Led
 from models.Button import Button
 from models.Base import Base
 from database.repositories.Datarepository import DataRepository
+
 GPIO.setmode(GPIO.BCM)
 
 leds = [Led([26, 19]), Led([18, 6]), Led([21, 20]), Led([16, 12])]
@@ -20,6 +24,30 @@ for led in leds:
     
 time_score = 0
 playing = 0
+
+app = Flask(__name__)
+app.config['SECRET_KEY']="supergeheimesleuteldaniemandmagweten6"
+socketio=SocketIO(app, cors_allowed_origins='*')
+
+@socketio.on('connect')
+def connect_message():
+    print('client connected')
+    clientid=request.sid
+    emit("B2F_client_connected", clientid, broadcast=False)
+
+@socketio.on('F2B_start_singleplayer')
+def start_singleplayer(player_name, difficulty):
+    singleplayer(difficulty, player_name)
+
+@socketio.on('F2B_start_multiplayer')
+def start_multiplayer(player1_name, player2_name):
+    print(f"er word een like aangevraagd")
+
+# @socketio.on('F2B_request_scoreboard')
+# def request_scoreboard(gamemode, difficulty):
+#     DataRepository
+
+
 
 def timer():
     global time_score
@@ -53,7 +81,7 @@ def multiplayer(player1_name, player2_name):
         base.activate('blue')
 
     result = " "
-            
+
     while result == " ":
         if bases[0].active==False and bases[1].active==False:
             result="blue"
@@ -97,3 +125,7 @@ except KeyboardInterrupt:
 
 finally:
     GPIO.cleanup()
+
+
+if __name__ == '__main__':
+    socketio.run(app,host="127.0.0.1",port=5010, debug=True)
