@@ -41,11 +41,9 @@ def start_singleplayer(player_name, difficulty):
 
 @socketio.on('F2B_start_multiplayer')
 def start_multiplayer(player1_name, player2_name):
-    print(f"er word een like aangevraagd")
+    multiplayer(player1_name, player2_name)
 
-# @socketio.on('F2B_request_scoreboard')
-# def request_scoreboard(gamemode, difficulty):
-#     DataRepository
+
 
 
 
