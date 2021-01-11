@@ -1,4 +1,7 @@
 from RPi import GPIO
+from flask import Flask, render_template, json, request, jsonify
+from flask_socketio import SocketIO,send,emit
+from flask_cors import CORS
 import time
 import random
 import threading
@@ -11,6 +14,18 @@ GPIO.setmode(GPIO.BCM)
 leds = [Led([26, 19]), Led([13, 6]), Led([5, 0]), Led([11, 9]), Led([21, 20]), Led([16, 12]), Led([1, 7]), Led([8, 25])]
 buttons = [Button(10), Button(22), Button(27), Button(17), Button(24), Button(23), Button(18), Button(15)]
 bases = []
+
+value=True
+player_name=""
+difficulty=""
+player2_name=""
+player1_name=""
+
+app = Flask(__name__)
+app.config['SECRET_KEY'] = 'Hier mag je om het even wat schrijven, zolang het maar geheim blijft en een string is'
+
+socketio = SocketIO(app, cors_allowed_origins="*")
+CORS(app)
 
 for led in leds:
     bases.append(Base(led, buttons[leds.index(led)]))
@@ -40,6 +55,9 @@ def singleplayer(total_bases, player_name):
         bases_completed += 1
     playing = False
     print(f"finished with time: {time_score}")
+    status= f"finished with time: {time_score}"
+    #Code voor alle leds te doven
+    socketio.emit("B2F_sp_stop_game",{'status':status},broadcast=False)  
 
 def multiplayer(player1_name, player2_name):
     global playing
@@ -67,20 +85,27 @@ def deactivate_all_bases():
 def game(gamemode, difficulty="easy"):
     global playing
     playing = True
-    if gamemode == "mp":
-        player1_name = str(input("Whats the name of player 1 \n"))
-        player2_name = str(input("Whats the name of player 2 \n"))
+    @socketio.on("F2B_start_multiplayer")
+    def multiplayer(data):
+        player1_name= data['mp_naam1']
+        player2_name= data['mp_naam2']
         mp = threading.Thread(target=multiplayer, args=[player1_name, player2_name])
         mp.start()
-    if gamemode == "sp":
-        player_name = str(input("Whats the name of the player \n"))
-        if difficulty == "easy":
-            sp = threading.Thread(target=singleplayer, args=[10, player_name])
-        if difficulty == "normal":
-            sp = threading.Thread(target=singleplayer, args=[15, player_name])
-        if difficulty == "hard":
-            sp = threading.Thread(target=singleplayer, args=[20, player_name])
-        sp.start()
+    
+    @socketio.on('F2B_start_singleplayer')
+    def singleplayer(data):
+        if value==True:
+            player_name= data['sp_naam']
+            difficulty= data['sp_moeilijkheidsgraad']
+            print(player_name)
+            value==False
+            if difficulty == "easy":
+                sp = threading.Thread(target=singleplayer, args=[10, player_name])
+            if difficulty == "normal":
+                sp = threading.Thread(target=singleplayer, args=[15, player_name])
+            if difficulty == "hard":
+                sp = threading.Thread(target=singleplayer, args=[20, player_name])
+            sp.start()
 
 
 try:

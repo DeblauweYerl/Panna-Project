@@ -5,18 +5,20 @@ from flask_cors import CORS
 app = Flask(__name__)
 app.config['SECRET_KEY']="mysecret"
 socketio=SocketIO(app, cors_allowed_origins='*')
+value=True
+
 
 @socketio.on('connect')
 def connect_message():
     print('client connected')
-    clientid="kaka"
+    clientid="k"
     emit("B2F_client_connected", clientid, broadcast=False) #Broadcast=True -> Naar alle clients word de boodschap gestuurd
     #Broadcasr=False -> Er word geen boodschap gestuurd naar alle clients
 
-@socketio.on('F2B_start_singleplayer')
-def handle_message(json):
-    data= json['sp_naam']
-    print(data)
+
+
+  
+
 
 
 if __name__ == '__main__':
