@@ -20,5 +20,7 @@ def handle_message(data):
     moeilijkheidsgraad = data['sp_moeilijkheidsgraad']
     print(moeilijkheidsgraad)
 
+
+
 if __name__ == '__main__':
     socketio.run(app,host="127.0.0.1",port=5010, debug=True)
