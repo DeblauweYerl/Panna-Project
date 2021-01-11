@@ -2,8 +2,8 @@
 let naam, button;
 const lanIP = `${window.location.hostname}:5010`; //ip adres automatisch opvragen met ${window.location.hostname}
 const socketio = io(lanIP);
-let btn_start_singleplayer, singleplayer_naam, singleplayer_moeilijkheidgraad, singleplayer_tijd, btn_stop_singleplayer,end_singleplayer_text;
-
+let btn_start_singleplayer, singleplayer_naam, singleplayer_moeilijkheidgraad, btn_stop_singleplayer,end_singleplayer_text;
+let singleplayer_tijd=0;
 
 const listenToSingleplayer=function(){
 
@@ -24,13 +24,16 @@ const listenToSingleplayerGame=function(){
         // navigeren naar endgameSingleplayer.html
         singleplayer_tijd = document.querySelector(".time").textContent;
         console.log(singleplayer_tijd);
-        window.location.href="endgameSingleplayer.html";
+        window.location.href=`endgameSingleplayer.html?time=${singleplayer_tijd}`;
     })  
 };
 
 const listenToEndgameSingleplayer= function(){
-    console.log(singleplayer_tijd);
-    document.querySelector('.js-end-time').innerHTML = `Je hebt het spel voltooid in ${singleplayer_tijd}`
+    const urlParams = new URLSearchParams(window.location.search);
+    const tijd = urlParams.get('time');
+    console.log(tijd);
+    document.querySelector('.js-end-time').innerHTML = `Je hebt het spel voltooid in ${tijd}`
+    socketio.emit("F2B_tijd", {sp_tijd: tijd});
 }
 
 const loadSocketListeners = function () {
@@ -53,8 +56,7 @@ const loadSocketListeners = function () {
         socketio.emit("F2B_tijd", {sp_tijd: singleplayer_tijd});
 
         // navigeren naar endgameSingleplayer.html
-        window.location.href="endgameSingleplayer.html";
-        document.querySelector('.js-end-time').innerHTML = `Je hebt het spel voltooid in ${singleplayer_tijd}`
+        window.location.href=`endgameSingleplayer.html?time=${singleplayer_tijd}`;
     });
 };
 
