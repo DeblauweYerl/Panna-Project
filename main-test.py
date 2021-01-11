@@ -52,8 +52,6 @@ def request_scoreboard(gamemode, difficulty):
 
 def singleplayer(difficulty, player_name):
     global playing
-    timer_thread = threading.Thread(target=timer)
-    timer_thread.start()
 
     total_bases = 10 + (difficulty * 5)
     bases_completed = 0
