@@ -9,7 +9,7 @@ socketio=SocketIO(app, cors_allowed_origins='*')
 @socketio.on('connect')
 def connect_message():
     print('client connected')
-    clientid="kaka"
+    clientid="id"
     emit("B2F_client_connected", clientid, broadcast=False) #Broadcast=True -> Naar alle clients word de boodschap gestuurd
     #Broadcasr=False -> Er word geen boodschap gestuurd naar alle clients
 
@@ -19,8 +19,6 @@ def handle_message(data):
     print(naam)
     moeilijkheidsgraad = data['sp_moeilijkheidsgraad']
     print(moeilijkheidsgraad)
-
-
 
 if __name__ == '__main__':
     socketio.run(app,host="127.0.0.1",port=5010, debug=True)
