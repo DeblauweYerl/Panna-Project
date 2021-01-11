@@ -57,7 +57,7 @@ def singleplayer(total_bases, player_name):
     print(f"finished with time: {time_score}")
     status= f"finished with time: {time_score}"
     #Code voor alle leds te doven
-    socketio.emit("B2F_sp_stop_game",{'status':status},broadcast=False)  
+    socketio.emit("B2F_sp_stop_game",{'status':status,'time':time_score},broadcast=False)  
 
 def multiplayer(player1_name, player2_name):
     global playing

@@ -39,6 +39,10 @@ def connect_message():
 def start_singleplayer(player_name, difficulty):
     singleplayer(difficulty, player_name)
 
+@socketio.on('F2B_sp_time')
+def sp_time(time):
+    
+
 @socketio.on('F2B_start_multiplayer')
 def start_multiplayer(player1_name, player2_name):
     multiplayer(player1_name, player2_name)
