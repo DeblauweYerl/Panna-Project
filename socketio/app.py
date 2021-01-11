@@ -20,7 +20,6 @@ def handle_message(data):
     moeilijkheidsgraad = data['sp_moeilijkheidsgraad']
     print(moeilijkheidsgraad)
 
-@socketio.on('F2B_start_singleplayer')
 
 
 if __name__ == '__main__':
