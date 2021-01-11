@@ -14,7 +14,7 @@
             <div class="align-base">
                 <div class="align-arrow">
                     <!-- code for arrow -->
-                    <svg onclick="location.href='index.html';" id="Page-1" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
+                    <svg onclick="location.href='startpage.html';" id="Page-1" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
                         <g id="Core" transform="translate(-424 -4)">
                           <g id="arrow-back" transform="translate(424 4)">
                             <path id="Shape" d="M16,7H3.8L9.4,1.4,8,0,0,8l8,8,1.4-1.4L3.8,9H16V7Z" fill="#2a324b" fill-rule="evenodd"/>
@@ -41,7 +41,7 @@
                             <label class="c-label " for="name">
                                 NAAM SPELER
                             </label>
-                            <input class="c-input js_singleplayer_naam" type="text" name="name" id="name" required>
+                            <input class="c-input js_singleplayer_naam" autocomplete="off" type="text" name="name" id="name" required>
                         </p>  
                     </form>
 
@@ -192,10 +192,11 @@
                                   </tr>
                             </TBody>
                           </table>
+                        <div class="align-button">
+                            <button class="c-button " onclick="location.href='scorebord.html';">Volledig scorebord</button>
+                        </div>
                 </div>     
-                <div class="align-button">
-                    <button class="btn c-button " onclick="location.href='scorebord.html';">Volledig scorebord</button>
-                </div>
+              
             </div>
         </div>
     </div>  
