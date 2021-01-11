@@ -6,6 +6,7 @@ let btn_start_singleplayer, singleplayer_naam, singleplayer_moeilijkheidgraad, s
 
 
 const listenToSingleplayer=function(){
+
     btn_start_singleplayer.addEventListener("click", function() {
         //singleplayer starten
         singleplayer_naam= document.querySelector(".js_singleplayer_naam").value;
@@ -18,7 +19,7 @@ const listenToSingleplayer=function(){
 
 
 const listenToSingleplayerGame=function(){
-    console.log("test")
+    console.log("test");
     btn_stop_singleplayer.addEventListener("click", function() {
         // tijd ophalen van de timer
         singleplayer_tijd = document.querySelector(".time").textContent;
@@ -76,9 +77,9 @@ const init = function () {
     btn_start_singleplayer = document.querySelector('.js-start-singleplayer');
     btn_stop_singleplayer = document.querySelector('.js-stop-game-singleplayer');
     loadSocketListeners();
-    button.disabled = 'disabled';
-    eventListenersToevoegen();
+    
     if(btn_start_singleplayer!=null){
+        eventListenersToevoegen();
         listenToSingleplayer();
     }
     if(btn_stop_singleplayer!=null){
