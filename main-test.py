@@ -4,11 +4,15 @@ import random
 import threading
 from datetime import datetime
 from datetime import timedelta
+from flask import Flask, render_template, json, request, jsonify
+from flask_socketio import SocketIO,send,emit
+from flask_cors import CORS
 
 from models.Led import Led
 from models.Button import Button
 from models.Base import Base
-from database.repositories.Datarepository import DataRepository
+from database.repositories.Datarepository import DataRepository\
+
 GPIO.setmode(GPIO.BCM)
 
 leds = [Led([26, 19]), Led([18, 6]), Led([21, 20]), Led([16, 12])]
@@ -17,21 +21,45 @@ bases = []
 for led in leds:
     GPIO.output(led.pins, 0)
     bases.append(Base(led, buttons[leds.index(led)]))
-    
-time_score = 0
+
+time
 playing = 0
 
-def timer():
-    global time_score
-    start = round(time.time(), 8)
-    while playing:
-        time_score = round(time.time(), 8) - start
+app = Flask(__name__)
+app.config['SECRET_KEY']="supergeheimesleuteldaniemandmagweten6"
+socketio=SocketIO(app, cors_allowed_origins='*')
+
+@socketio.on('connect')
+def connect_message():
+    print('client connected')
+    clientid=request.sid
+    emit("B2F_client_connected", clientid, broadcast=False)
+
+@socketio.on('F2B_start_singleplayer')
+def start_singleplayer(data):
+    if playing == False:
+        player_name = data['sp_naam']
+        difficulty = data['sp_moeilijkheidsgraad']
+        sp = threading.Thread(target=singleplayer, args=[difficulty, player_name])
+        sp.start()
+
+@socketio.on('F2B_start_multiplayer')
+def start_multiplayer(player1_name, player2_name):
+    multiplayer(player1_name, player2_name)
+
+@socketio.on('F2B_request_scoreboard')
+def request_scoreboard(gamemode, difficulty):
+    data = DataRepository.read_scoreboard(difficulty)
+    #verstuur data naar client die de request gedaan heeft (nog keer opzoeken hoe da moet)
+
+@socketio.on('F2B_stop_game')
+def stop_game(data):
+    time = data['time']
+
 
 
 def singleplayer(difficulty, player_name):
     global playing
-    timer_thread = threading.Thread(target=timer)
-    timer_thread.start()
 
     total_bases = 10 + (difficulty * 5)
     bases_completed = 0
@@ -40,8 +68,8 @@ def singleplayer(difficulty, player_name):
         current_base.activate()
         current_base.check_for_hit()
         bases_completed += 1
+   emit('B2F_stop_game', clientid, broadcast=False)
     # DataRepository.insert_game(datetime.now(), player_name, time_score, difficulty)
-    print(f"\nfinished with time: {time_score}")
     playing = False
 
 
@@ -53,7 +81,7 @@ def multiplayer(player1_name, player2_name):
         base.activate('blue')
 
     result = " "
-            
+
     while result == " ":
         if bases[0].active==False and bases[1].active==False:
             result="blue"
@@ -97,3 +125,7 @@ except KeyboardInterrupt:
 
 finally:
     GPIO.cleanup()
+
+
+if __name__ == '__main__':
+    socketio.run(app,host="127.0.0.1",port=5010, debug=True)

@@ -11,19 +11,10 @@ class DataRepository:
 
 
     @staticmethod
-    def read_scoreboard_easy():
-        sql = "SELECT DISTINCT PlayerName, Time FROM tblGame WHERE Difficulty = 0 ORDER BY Time DESC"
-        return Database.get_rows(sql)
-
-    @staticmethod
-    def read_scoreboard_normal():
-        sql = "SELECT DISTINCT PlayerName, Time FROM tblGame WHERE Difficulty = 1 ORDER BY Time DESC"
-        return Database.get_rows(sql)
-
-    @staticmethod
-    def read_scoreboard_hard():
-        sql = "SELECT DISTINCT PlayerName, Time FROM tblGame WHERE Difficulty = 2 ORDER BY Time DESC"
-        return Database.get_rows(sql)
+    def read_scoreboard(difficulty):
+        sql = "SELECT DISTINCT PlayerName, Time FROM tblGame WHERE Difficulty = %s ORDER BY Time DESC"
+        params = [difficulty]
+        return Database.get_rows(sql, params)
 
 
     @staticmethod
