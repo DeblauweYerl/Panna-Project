@@ -11,7 +11,7 @@ from flask_cors import CORS
 from models.Led import Led
 from models.Button import Button
 from models.Base import Base
-from database.repositories.Datarepository import DataRepository\
+from database.repositories.Datarepository import DataRepository
 
 GPIO.setmode(GPIO.BCM)
 
@@ -22,7 +22,8 @@ for led in leds:
     GPIO.output(led.pins, 0)
     bases.append(Base(led, buttons[leds.index(led)]))
 
-time
+player_name = ""
+difficulty = 0
 playing = 0
 
 app = Flask(__name__)
@@ -37,9 +38,12 @@ def connect_message():
 
 @socketio.on('F2B_start_singleplayer')
 def start_singleplayer(data):
-    if playing == False:
-        player_name = data['sp_naam']
-        difficulty = data['sp_moeilijkheidsgraad']
+    if not playing:
+        global player_name
+        global difficulty
+        player_name = data['sp_name']
+        difficulty = data['sp_difficulty']
+
         sp = threading.Thread(target=singleplayer, args=[difficulty, player_name])
         sp.start()
 
@@ -50,26 +54,25 @@ def start_multiplayer(player1_name, player2_name):
 @socketio.on('F2B_request_scoreboard')
 def request_scoreboard(gamemode, difficulty):
     data = DataRepository.read_scoreboard(difficulty)
-    #verstuur data naar client die de request gedaan heeft (nog keer opzoeken hoe da moet)
 
-@socketio.on('F2B_stop_game')
-def stop_game(data):
+@socketio.on('F2B_end_singleplayer')
+def end_singleplayer(data):
     time = data['time']
+    DataRepository.insert_game(datetime.now(), player_name, time, difficulty)
 
 
 
 def singleplayer(difficulty, player_name):
     global playing
 
-    total_bases = 10 + (difficulty * 5)
+    total_bases = 10 + (int(difficulty) * 5)
     bases_completed = 0
     while(bases_completed <= total_bases):
         current_base = bases[random.randint(0, 3)]
         current_base.activate()
         current_base.check_for_hit()
         bases_completed += 1
-   emit('B2F_stop_game', clientid, broadcast=False)
-    # DataRepository.insert_game(datetime.now(), player_name, time_score, difficulty)
+    socketio.emit('B2F_stop_game', broadcast=False)
     playing = False
 
 
@@ -112,6 +115,8 @@ def game(gamemode, difficulty=0):
 
 
 try:
+    if __name__ == '__main__':
+        socketio.run(app,host="192.168.0.26",port=5010, debug=True)
     while True:
         if playing == False:
             gamemode = input("sp of mp?: ")
@@ -126,6 +131,3 @@ except KeyboardInterrupt:
 finally:
     GPIO.cleanup()
 
-
-if __name__ == '__main__':
-    socketio.run(app,host="127.0.0.1",port=5010, debug=True)
