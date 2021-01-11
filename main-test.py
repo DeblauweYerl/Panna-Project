@@ -21,7 +21,7 @@ bases = []
 for led in leds:
     GPIO.output(led.pins, 0)
     bases.append(Base(led, buttons[leds.index(led)]))
-    
+
 time_score = 0
 playing = 0
 
@@ -48,14 +48,6 @@ def request_scoreboard(gamemode, difficulty):
     data = DataRepository.read_scoreboard(difficulty)
     #verstuur data naar client die de request gedaan heeft (nog keer opzoeken hoe da moet)
 
-
-
-
-def timer():
-    global time_score
-    start = round(time.time(), 8)
-    while playing:
-        time_score = round(time.time(), 8) - start
 
 
 def singleplayer(difficulty, player_name):
