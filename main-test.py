@@ -11,7 +11,7 @@ from flask_cors import CORS
 from models.Led import Led
 from models.Button import Button
 from models.Base import Base
-from database.repositories.Datarepository import DataRepository
+from database.repositories.Datarepository import DataRepository\
 
 GPIO.setmode(GPIO.BCM)
 
@@ -22,7 +22,7 @@ for led in leds:
     GPIO.output(led.pins, 0)
     bases.append(Base(led, buttons[leds.index(led)]))
 
-time_score = 0
+time
 playing = 0
 
 app = Flask(__name__)
@@ -36,12 +36,12 @@ def connect_message():
     emit("B2F_client_connected", clientid, broadcast=False)
 
 @socketio.on('F2B_start_singleplayer')
-def start_singleplayer(player_name, difficulty):
-    singleplayer(difficulty, player_name)
-
-@socketio.on('F2B_sp_time')
-def sp_time(time):
-    
+def start_singleplayer(data):
+    if playing == False:
+        player_name = data['sp_naam']
+        difficulty = data['sp_moeilijkheidsgraad']
+        sp = threading.Thread(target=singleplayer, args=[difficulty, player_name])
+        sp.start()
 
 @socketio.on('F2B_start_multiplayer')
 def start_multiplayer(player1_name, player2_name):
@@ -51,6 +51,10 @@ def start_multiplayer(player1_name, player2_name):
 def request_scoreboard(gamemode, difficulty):
     data = DataRepository.read_scoreboard(difficulty)
     #verstuur data naar client die de request gedaan heeft (nog keer opzoeken hoe da moet)
+
+@socketio.on('F2B_stop_game')
+def stop_game(data):
+    time = data['time']
 
 
 
@@ -64,8 +68,8 @@ def singleplayer(difficulty, player_name):
         current_base.activate()
         current_base.check_for_hit()
         bases_completed += 1
+   emit('B2F_stop_game', clientid, broadcast=False)
     # DataRepository.insert_game(datetime.now(), player_name, time_score, difficulty)
-    print(f"\nfinished with time: {time_score}")
     playing = False
 
 
