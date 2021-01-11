@@ -14,6 +14,7 @@ const listenToClick=function(){
         singleplayer_moeilijkheidgraad= document.getElementById("js-singleplayer-select").options[document.getElementById("js-singleplayer-select").selectedIndex].value;;
         socketio.emit("F2B_start_singleplayer", {sp_naam: singleplayer_naam, sp_moeilijkheidsgraad: singleplayer_moeilijkheidgraad});
         console.log(singleplayer_moeilijkheidgraad);
+        window.location.href="singleplayerGame.html"
         
 
     })
@@ -37,7 +38,7 @@ const loadSocketListeners = function () {
 const checkValues = function () {
     if (naam.value.length >0 && naam.value.length <= 14) {
         button.disabled = false;
-        listenToClick()
+        listenToClick();
     } else {
         button.disabled = true;
     }
