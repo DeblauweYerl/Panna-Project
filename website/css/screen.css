@@ -18,15 +18,11 @@
 
 @keyframes fadeOut {
     0% {opacity:1;}
-    100% {opacity:0.4;}
+    100% {opacity:0;}
 
     }
 
-    @keyframes fadeIn {
-        0% {opacity:0.4;}
-        100% {opacity:1;}
-    
-        }
+
 
 :root {
     --main-color: #2A324B;
@@ -126,9 +122,7 @@ body {
 }
 
 
-.fadein{
-    -webkit-animation: fadeIn ease 2s; 
-}
+
   
 /* Style the active class, and buttons on mouse-over */
 .active, .c-button:hover {
