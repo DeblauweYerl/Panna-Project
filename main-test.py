@@ -22,7 +22,8 @@ for led in leds:
     GPIO.output(led.pins, 0)
     bases.append(Base(led, buttons[leds.index(led)]))
 
-time
+player_name = ""
+difficulty = 0
 playing = 0
 
 app = Flask(__name__)
@@ -37,9 +38,12 @@ def connect_message():
 
 @socketio.on('F2B_start_singleplayer')
 def start_singleplayer(data):
-    if playing == False:
-        player_name = data['sp_naam']
-        difficulty = data['sp_moeilijkheidsgraad']
+    if not playing:
+        global player_name
+        global difficulty
+        player_name = data['sp_name']
+        difficulty = data['sp_difficulty']
+
         sp = threading.Thread(target=singleplayer, args=[difficulty, player_name])
         sp.start()
 
@@ -50,11 +54,11 @@ def start_multiplayer(player1_name, player2_name):
 @socketio.on('F2B_request_scoreboard')
 def request_scoreboard(gamemode, difficulty):
     data = DataRepository.read_scoreboard(difficulty)
-    #verstuur data naar client die de request gedaan heeft (nog keer opzoeken hoe da moet)
 
-@socketio.on('F2B_stop_game')
-def stop_game(data):
+@socketio.on('F2B_end_singleplayer')
+def end_singleplayer(data):
     time = data['time']
+    DataRepository.insert_game(datetime.now(), player_name, time, difficulty)
 
 
 
@@ -69,7 +73,6 @@ def singleplayer(difficulty, player_name):
         current_base.check_for_hit()
         bases_completed += 1
     socketio.emit('B2F_stop_game', broadcast=False)
-    # DataRepository.insert_game(datetime.now(), player_name, time_score, difficulty)
     playing = False
 
 
