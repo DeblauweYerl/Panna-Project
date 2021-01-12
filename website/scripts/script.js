@@ -35,11 +35,32 @@ const listenToEndgameSingleplayer= function(){
     socketio.emit("F2B_end_singleplayer", {time: time});
 }
 
+const loadScoreboard = function(jsonObject){
+    console.log(jsonObject)
+    for(const element of jsonObject){
+        elementenHTML+= 
+        `<tr>
+            <td>${element.index}</td>
+            <td>${element.name}</td>
+            <td>${element.time}</td>
+        </tr>`
+        ;
+    }
+    document.querySelector('.js-scoreboard').innerHTML=elementenHTML;
+}
+
+
+
 const loadSocketListeners = function () {
     socketio.on("message",function(msg){
      console.log("printing message from backend");
      document.querySelector('.js-messages').innerHTML+= `${msg}<br>`;
     });
+
+    socketio.on("B2F_scoreboard",function(jsonObject){
+        console.log("Getting json of scoreboard")
+        loadScoreboard(jsonObject)
+       })
 
     socketio.on('B2F_client_connected',function(msg){
       console.log(`Server Responded:${msg}`);
@@ -79,7 +100,7 @@ const init = function () {
     btn_stop_singleplayer = document.querySelector('.js-stop-game-singleplayer');
     end_singleplayer_text = document.querySelector('.js-end-time')
     loadSocketListeners();
-    
+    loadScoreboard();
     if(btn_start_singleplayer!=null){
         playername = document.querySelector('.js-playername');
         button.disabled=true;
@@ -92,6 +113,7 @@ const init = function () {
     if(end_singleplayer_text!=null){
         listenToEndgameSingleplayer();
     }
+
 };
 
 document.addEventListener('DOMContentLoaded', function () {
