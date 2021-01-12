@@ -224,19 +224,6 @@ body {
     width: 187px;
   }
   
-  
-  #playButton {
-    display: block;
-  }
-  
-  #pauseButton {
-    display: none;
-  }
-
-
-
-
-
 
 /*the container must be positioned relative:*/
 .custom-select {
