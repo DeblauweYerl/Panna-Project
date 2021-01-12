@@ -23,6 +23,7 @@ for led in leds:
     bases.append(Base(led, buttons[leds.index(led)]))
 
 player_name = ""
+player2_name = ""
 difficulty = 0
 playing = 0
 
@@ -48,11 +49,19 @@ def start_singleplayer(data):
         sp.start()
 
 @socketio.on('F2B_start_multiplayer')
-def start_multiplayer(player1_name, player2_name):
-    multiplayer(player1_name, player2_name)
+def start_multiplayer(data):
+    if not playing:
+        global player_name
+        global player2_name
+        player_name = data['player1_name']
+        player2_name = data['player2_name']
+
+        mp = threading.Thread(target=multiplayer, args=[player_name, player2_name])
+        mp.start()
 
 @socketio.on('F2B_request_scoreboard')
-def request_scoreboard(gamemode, difficulty):
+def request_scoreboard(data):
+    difficulty = data['difficulty']
     data = DataRepository.read_scoreboard(difficulty)
 
 @socketio.on('F2B_end_singleplayer')
@@ -64,6 +73,7 @@ def end_singleplayer(data):
 
 def singleplayer(difficulty, player_name):
     global playing
+    playing = True
 
     total_bases = 10 + (int(difficulty) * 5)
     bases_completed = 0
@@ -78,20 +88,50 @@ def singleplayer(difficulty, player_name):
 
 def multiplayer(player1_name, player2_name):
     global playing
+    playing = True
+
+    #leds per team oplichten in de respectievelijke kleur
     for base in bases[0:2]:
         base.activate('red')
     for base in bases[2:4]:
         base.activate('blue')
 
-    result = " "
+    #puntentelling + punt versturen over socket
+    team_red_previous = [True, True]
+    team_red = []
+    team_red_score = 2
+    team_blue_previous = [True, True]
+    team_blue = []
+    team_blue_score = 2
 
-    while result == " ":
-        if bases[0].active==False and bases[1].active==False:
-            result="blue"
-            print(f"{player2_name} won!")
-        if bases[2].active==False and bases[3].active==False:
-            result="red"
-            print(f"{player1_name} won!")
+    while team_red_score!=0 and team_blue_score!=0:
+        for base in bases[0:2]:
+            team_red.append(base.active)
+        team_red_score = team_red.count(True)
+        print(f"team_red {team_red}")
+        print(f"team_red_previous {team_red_previous}")
+        if team_red != team_red_previous:
+            print("hit on red")
+            socketio.emit('B2F_multiplayer_score', {'team': 'red', 'score': team_red_score})
+            team_red_previous = team_red
+
+        for base in bases[2:4]:
+            team_blue.append(base.active)
+        team_blue_score = team_blue.count(True)
+        if team_blue != team_blue_previous:
+            print("hit on blue")
+            socketio.emit('B2F_multiplayer_score', {'team': 'blue', 'score': team_blue_score})
+            team_blue_previous = team_blue
+
+        team_red.clear()
+        team_blue.clear()
+        time.sleep(.01)
+
+    if team_red_score == 0:
+        socketio.emit('B2F_multiplayer_end', {'winner': player2_name})
+    else:
+        socketio.emit('B2F_multiplayer_end', {'winner': player1_name})
+
     playing = False
     deactivate_all_bases()
 
