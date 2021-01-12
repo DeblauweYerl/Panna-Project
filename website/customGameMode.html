@@ -11,25 +11,26 @@
 <body>
     <div class="container">
         <div class="item player1">
+            <div class="stopwatch c-stopwatch-margin">               
+                <span class="time" id="display">00:00:00</span>      
             <div>
-
-                <h1 class= "c-title">TIJD</h1>
-                <div class="stopwatch">
-                    
-                    <div class="circle">
-                      <span class="time" id="display">00:00:00</span>
-                    </div>
-              
-                    <div class="controls">
-                    </div>
-                  </div>                
+            <div class="c-grid-buttons">
                 <div>
-
-                <input type="button" class=" btn c-button pauseButton js-pauze-timer" value="Pauze" ></input>
-                <input type="button" class=" btn c-button pauseButton js-continue-timer" value="Hervat"  ></input>
-                <input type="button" class=" btn c-button pauseButton js-stop-game-singleplayer"  value="Stop het spel"></input>
-              </div>
-    </div>  
+                    <input type="button"  class= "btn c-button-small js-btn-1" value="1"/>
+                    <input type="button"  class= "btn c-button-small js-btn-2" value="2"/>
+                    <input type="button"  class= "btn c-button-small js-btn-3" value="3"/>
+                    <input type="button"  class= "btn c-button-small js-btn-4" value="4"/>
+                </div>
+                <div>
+                    <input type="button"  class= "btn c-button-small js-btn-5" value="5"/>
+                    <input type="button"  class= "btn c-button-small js-btn-6" value="6"/>
+                    <input type="button"  class= "btn c-button-small js-btn-7" value="7"/>
+                    <input type="button"  class= "btn c-button-small js-btn-8" value="8"/>
+                </div>
+                <input type="button"  class= "btn c-button js-stop-game" value="STOP GAME"/>
+            </div>
+        </div>
+    </div>
     <script>
         function timeToString(time) {
             let diffInHrs = time / 3600000;
@@ -73,26 +74,8 @@
             }, 10);
             showButton("PAUSE");
           }
-          
-          function pause() {
-            clearInterval(timerInterval);
-            showButton("PLAY");
-          }
-
-          // Create function to display buttons
-          
-          function showButton(buttonKey) {
-            const buttonToShow = buttonKey === "PLAY" ? playButton : pauseButton;
-            const buttonToHide = buttonKey === "PLAY" ? pauseButton : playButton;
-            buttonToShow.style.display = "absolute";
-            buttonToHide.style.display = "none";
-          }
-          // Create event listeners
-          
-          let playButton = document.querySelector('.js-pauze-timer');
-          let pauseButton = document.querySelector('.js-continue-timer');
+         
           start();         
-          playButton.addEventListener("click", start);
-          pauseButton.addEventListener("click", pause);
+         
     </script>
 </body>

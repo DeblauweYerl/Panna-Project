@@ -52,6 +52,8 @@ h3 {
     font-weight: 700;
 }
 
+
+
 h1 {
     font-size: 16px;
     line-height: 24px;
@@ -130,6 +132,11 @@ body {
     color: white;
 }
 
+.active, .c-button-small:hover {
+    background-color: var(--third-color);
+    color: white;
+}
+
 .c-button__red {
     font-size: 16px;
     font-weight: 700;   
@@ -143,6 +150,20 @@ body {
     border: none;
 }
 
+.c-button__blue {
+    font-size: 16px;
+    font-weight: 700;   
+    background-color: var(--main-color);
+    color: #fff;
+    padding: 11px 16px;
+    line-height: 24px;
+    width:70vw;
+    outline: none;
+    border-radius: 100px;
+    border: none;
+}
+
+
 
 .c-button:active {
     background-color: var(--main-color-dark);
@@ -154,6 +175,8 @@ body {
     background-color: var(--third-color);
     padding: 3% 14%;
     border-radius: 25px;
+    width:50vw;
+    
 }
 
 .c-square-blue{
@@ -161,6 +184,7 @@ body {
     background-color: var(--main-color);
     padding: 3% 14%;
     border-radius: 25px;
+    width:50vw;
 }
 
 
@@ -203,19 +227,6 @@ body {
     width: 187px;
   }
   
-  
-  #playButton {
-    display: block;
-  }
-  
-  #pauseButton {
-    display: none;
-  }
-
-
-
-
-
 
 /*the container must be positioned relative:*/
 .custom-select {
@@ -423,9 +434,6 @@ body {
     align-items: center;
     
   }
-  /* vanaf 700 px niet meer breder gaan */
-
- 
 
 .c-rank__uneven {
     display: flex;
@@ -532,6 +540,10 @@ body {
     border-color: var(--secondary-color);
 }
 
+.button-sp{
+    position: static;
+}
+
 
 .c-button {
     font-size: 16px;
@@ -564,7 +576,25 @@ body {
     margin-top: 20%;
 }
 
+.c-button-small
+{
+    font-size: 16px;
+    font-weight: 700;    
+    background-color: var(--main-color);
+    color: #fff;
+    padding: 11px 16px;
+    line-height: 24px;
+    width: 50px;
+    outline: none;
+    border: none;
+    border-radius: 100%;
+    margin: 0.5em;
+}
 
+.c-grid-buttons{
+    display: grid;
+    row-gap: 6em;
+}
 
 tbody {
     display: block;
@@ -613,6 +643,12 @@ tr:nth-child(even) {
 }
 
 
+@media (min-width: 321px){
+    button{
+        margin: 0px;
+    }
+}
+
 @media (min-width:374px){
 
     h1 {
@@ -643,6 +679,19 @@ tr:nth-child(even) {
         display: flex;
         justify-content: center;
         align-items: center;
+    }
+
+    .c-button__blue {
+        font-size: 16px;
+        font-weight: 700;    
+        background-color: var(--main-color);
+        color: #fff;
+        padding: 11px 16px;
+        line-height: 24px;
+        width: 70vw;
+        outline: none;
+        border: none;
+        border-radius: 100px;
     }
     .align-button{
         position:absolute;                  
@@ -716,6 +765,19 @@ tr:nth-child(even) {
         border-radius: 100px;
         border: none;
     }
+
+    .c-button__blue {
+        font-size: 16px;
+        font-weight: 700;   
+        background-color: var(--main-color);
+        color: #fff;
+        padding: 11px 16px;
+        line-height: 24px;
+        width:400px;
+        outline: none;
+        border-radius: 100px;
+        border: none;
+    }
     
     .c-card {
         background-color: var(--third-color);
@@ -749,6 +811,22 @@ tr:nth-child(even) {
         border: none;
         border-radius: 100px;
         margin-bottom: 1em;
+    }
+    .c-square-red{
+        color: var(--secondary-color);
+        background-color: var(--third-color);
+        padding: 3% 14%;
+        border-radius: 25px;
+        width:300px;
+        
+    }
+    
+    .c-square-blue{
+        color: var(--secondary-color);
+        background-color: var(--main-color);
+        padding: 3% 14%;
+        border-radius: 25px;
+        width:300px;
     }
 
 }
