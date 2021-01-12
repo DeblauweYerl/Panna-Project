@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/3.0.5/socket.io.js" integrity="sha512-2rUSTSAeOO02jF6eBqENNqPs1EohenJ5j+1dgDPdXSLz9nOlrr8DJk4zW/lDy8rjhGCSonW3Gx812XJQIKZKJQ==" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="css/screen.css">
-
+    <script src="scripts/script.js"></script>
     <title>Panna 360</title>
 </head>
 <body>
@@ -33,7 +33,7 @@
                                 <label class="c-label" for="name">
                                     SPELER 1
                                 </label>
-                                <input class="c-input" autocomplete="off" type="text" name="name" id="name" required>
+                                <input class="c-input js_multiplayer_naam1" autocomplete="off" type="text" name="name" id="name" required>
                             </p>
                         </form>
                     </div>
@@ -44,7 +44,7 @@
                                 <label class="c-label" for="name">
                                     SPELER 2
                                 </label>
-                                <input class="c-input-dark" autocomplete="off" type="text" name="name" id="name" required>
+                                <input class="c-input-dark  js_multiplayer_naam2" autocomplete="off" type="text" name="name" id="name" required>
                             </p>
                         </form>
                     </div>
@@ -52,7 +52,7 @@
                
 
                 <div class="align-button">
-                    <button class="c-button" onclick="location.href='startMultiplayer.html';">start game</button>
+                    <button class="c-button js-start-multiplayer">start game</button>
                 </div>
             </div>   
         </div>

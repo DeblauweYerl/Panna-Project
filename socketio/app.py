@@ -17,9 +17,15 @@ def connect_message():
     #emit("B2F_stop_game", broadcast=False)
 
 
+@socketio.on('F2B_start_multiplayer')
+def handle_message_start_singleplayer(data):
+    naam1= data['mp_naam1']
+    print(naam1)
+    naam2= data['mp_naam2']
+    print(naam2)
 
 @socketio.on('F2B_start_singleplayer')
-def handle_message_start_singleplayer(data):
+def handle_message_start_multiplayer(data):
     naam= data['sp_naam']
     print(naam)
     moeilijkheidsgraad = data['sp_moeilijkheidsgraad']
@@ -31,11 +37,14 @@ def handle_message_tijd(data):
     tijd= data['sp_tijd']
     print(tijd)
 
+@socketio.on('F2B_multiplayer_stop')
+def handle_message_stop_multiplayer():
+    print("game manueel gestopt")
+
 @socketio.on('F2B_ledselection')
 def handle_message_ledsselection(data):
     number_led=data["led"]
     print(number_led)
-    #singleplayer_extra_modi(number_led,stop)
 
 #er word op de stop knop geduwd bij custom game mode
 @socketio.on('F2B_custom_stop')
