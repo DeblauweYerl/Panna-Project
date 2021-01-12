@@ -52,6 +52,10 @@ h3 {
     font-weight: 700;
 }
 
+button{
+    margin-left: 24px;
+}
+
 h1 {
     font-size: 16px;
     line-height: 24px;
@@ -534,6 +538,9 @@ body {
     border-color: var(--secondary-color);
 }
 
+.button-sp{
+    position: static;
+}
 
 .c-button {
     font-size: 16px;
@@ -632,6 +639,12 @@ tr:nth-child(even) {
     }
 }
 
+
+@media (min-width: 321px){
+    button{
+        margin: 0px;
+    }
+}
 
 @media (min-width:374px){
 
