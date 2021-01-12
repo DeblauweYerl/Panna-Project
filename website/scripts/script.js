@@ -102,7 +102,6 @@ const init = function () {
     btn_stop_singleplayer = document.querySelector('.js-stop-game-singleplayer');
     end_singleplayer_text = document.querySelector('.js-end-time')
     loadSocketListeners();
-    loadScoreboard();
     if(btn_start_singleplayer!=null){
         button.disabled=true;
         eventListenersToevoegen();
