@@ -31,6 +31,25 @@ def handle_message_tijd(data):
     tijd= data['sp_tijd']
     print(tijd)
 
+@socketio.on('F2B_ledsselection')
+def handle_message_ledsselection(data):
+    number_led=data["led"]
+    stop=data["stop"]
+    singleplayer_extra_modi(number_led,stop)
+
+
+def singleplayer_extra_modi(number_led,stop):
+    global playing
+    x=0
+    if(stop!= 1):
+        current_base = number_led
+        current_base.activate()
+        current_base.check_for_hit()
+    else:print("You ended training mode")
+    # DataRepository.insert_game(datetime.now(), player_name, time_score, difficulty)
+    playing = False
+
+
 
 
 if __name__ == '__main__':
