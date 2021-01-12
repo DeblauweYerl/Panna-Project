@@ -14,7 +14,7 @@ def connect_message():
     #Broadcasr=False -> Er word geen boodschap gestuurd naar alle clients
 
     # versturen als de game gestopt is
-    emit("B2F_stop_game", broadcast=False)
+    #emit("B2F_stop_game", broadcast=False)
 
 
 
@@ -37,6 +37,10 @@ def handle_message_ledsselection(data):
     print(number_led)
     #singleplayer_extra_modi(number_led,stop)
 
+#er word op de stop knop geduwd bij custom game mode
+@socketio.on('F2B_custom_stop')
+def handle_message_custom_stop():
+    print("stop")
 
 def singleplayer_extra_modi(number_led,stop):
     global playing
