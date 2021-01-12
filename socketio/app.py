@@ -34,8 +34,8 @@ def handle_message_tijd(data):
 @socketio.on('F2B_ledselection')
 def handle_message_ledsselection(data):
     number_led=data["led"]
-    stop=data["stop"]
-    singleplayer_extra_modi(number_led,stop)
+    print(number_led)
+    #singleplayer_extra_modi(number_led,stop)
 
 
 def singleplayer_extra_modi(number_led,stop):
