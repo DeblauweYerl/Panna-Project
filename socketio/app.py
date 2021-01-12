@@ -31,9 +31,7 @@ def handle_message_tijd(data):
     tijd= data['sp_tijd']
     print(tijd)
 
-@socketio.on('F2B_start_spelmodi3')
-def handle_message_spelmodi3(data):
-    naam=data['led']
+
 
 if __name__ == '__main__':
     socketio.run(app,host="127.0.0.1",port=5010, debug=True)
