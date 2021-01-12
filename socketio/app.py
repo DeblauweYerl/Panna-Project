@@ -6,6 +6,8 @@ app = Flask(__name__)
 app.config['SECRET_KEY']="mysecret"
 socketio=SocketIO(app, cors_allowed_origins='*')
 
+stop=False
+
 @socketio.on('connect')
 def connect_message():
     print('client connected')
@@ -45,22 +47,29 @@ def handle_message_stop_multiplayer():
 def handle_message_ledsselection(data):
     number_led=data["led"]
     print(number_led)
+    singleplayer_extra_modi(number_led)
 
 #er word op de stop knop geduwd bij custom game mode
 @socketio.on('F2B_custom_stop')
 def handle_message_custom_stop():
+    global stop
     print("stop")
+    stop=True
 
-def singleplayer_extra_modi(number_led,stop):
-    global playing
-    x=0
-    if(stop!= 1):
+
+
+def singleplayer_extra_modi(number_led):
+    global stop
+    if stop==False:
         current_base = number_led
         current_base.activate()
         current_base.check_for_hit()
-    else:print("You ended training mode")
+    else:
+        print("You ended training mode")
+        stop=False
+
     # DataRepository.insert_game(datetime.now(), player_name, time_score, difficulty)
-    playing = False
+    
 
 
 
