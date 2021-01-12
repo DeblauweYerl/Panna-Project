@@ -175,6 +175,8 @@ body {
     background-color: var(--third-color);
     padding: 3% 14%;
     border-radius: 25px;
+    width:50vw;
+    
 }
 
 .c-square-blue{
@@ -182,6 +184,7 @@ body {
     background-color: var(--main-color);
     padding: 3% 14%;
     border-radius: 25px;
+    width:50vw;
 }
 
 
@@ -808,6 +811,22 @@ tr:nth-child(even) {
         border: none;
         border-radius: 100px;
         margin-bottom: 1em;
+    }
+    .c-square-red{
+        color: var(--secondary-color);
+        background-color: var(--third-color);
+        padding: 3% 14%;
+        border-radius: 25px;
+        width:300px;
+        
+    }
+    
+    .c-square-blue{
+        color: var(--secondary-color);
+        background-color: var(--main-color);
+        padding: 3% 14%;
+        border-radius: 25px;
+        width:300px;
     }
 
 }
