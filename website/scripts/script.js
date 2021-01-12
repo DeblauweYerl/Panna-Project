@@ -2,7 +2,7 @@
 let playername, button;
 const lanIP = `${window.location.hostname}:5010`; //ip adres automatisch opvragen met ${window.location.hostname}
 const socketio = io(lanIP);
-let btn_start_singleplayer, singleplayer_naam, singleplayer_moeilijkheidgraad, btn_stop_singleplayer,end_singleplayer_text;
+let btn_start_singleplayer, singleplayer_naam, singleplayer_moeilijkheidgraad, btn_stop_singleplayer,end_singleplayer_text, btn_start_multiplayer;
 let singleplayer_tijd=0;
 
 const listenToSingleplayer=function(){
@@ -16,8 +16,6 @@ const listenToSingleplayer=function(){
         window.location.href="singleplayerGame.html";
     })  
 };
-
-
 const listenToSingleplayerGame=function(){
     console.log("test");
     btn_stop_singleplayer.addEventListener("click", function() {
@@ -27,14 +25,12 @@ const listenToSingleplayerGame=function(){
         window.location.href=`endgameSingleplayer.html?time=${singleplayer_tijd}`;
     })  
 };
-
 const listenToEndgameSingleplayer= function(){
     const urlParams = new URLSearchParams(window.location.search);
     const time = urlParams.get('time');
     document.querySelector('.js-end-time').innerHTML = `Je hebt het spel voltooid in ${time}`
     socketio.emit("F2B_end_singleplayer", {time: time});
 }
-
 const loadScoreboard = function(jsonObject){
     console.log(jsonObject)
     for(const element of jsonObject){
@@ -50,6 +46,23 @@ const loadScoreboard = function(jsonObject){
 }
 
 
+const listenToMultiplayer = function () {
+    player1_name = document.querySelector('.js-player1-name');
+    player2_name = document.querySelector('.js-player2-name');
+    btn_start_multiplayer.addEventListener('click', function(){
+        socketio.emit('F2B_start_multiplayer', {player1_name: player1_name, player2_name: player2_name});
+        window.location.href=`startMultiplayer.html?player1=${player1_name}&player2=${player2_name}`;
+    });
+};
+const listenToMultiplayerGame = function () {
+    const urlParams = new URLSearchParams(window.location.search);
+    const player1_name = urlParams.get('player1');
+    const player2_name = urlParams.get('player2');
+    btn_start_multiplayer.addEventListener('click', function(){
+        socketio.emit('F2B_start_multiplayer', {player1_name: player1_name, player2_name: player2_name});
+        window.location.href=`startMultiplayer.html?player1=${player1_name}&player2=${player2_name}`;
+    });
+};
 
 const loadSocketListeners = function () {
     socketio.on("message",function(msg){
@@ -96,6 +109,7 @@ const eventListenersToevoegen = function () {
 
 const init = function () {
     button = document.querySelector('input[type=button]');
+    btn_start_multiplayer = document.querySelector('.js-start-multiplayer')
     btn_start_singleplayer = document.querySelector('.js-start-singleplayer');
     btn_stop_singleplayer = document.querySelector('.js-stop-game-singleplayer');
     end_singleplayer_text = document.querySelector('.js-end-time')
@@ -107,11 +121,14 @@ const init = function () {
         eventListenersToevoegen();
         listenToSingleplayer(playername);
     }
-    if(btn_stop_singleplayer!=null){
+    else if(btn_stop_singleplayer!=null){
         listenToSingleplayerGame();
     }
-    if(end_singleplayer_text!=null){
+    else if(end_singleplayer_text!=null){
         listenToEndgameSingleplayer();
+    }
+    else if(btn_start_multiplayer!=null){
+        listenToMultiplayer();
     }
 
 };
