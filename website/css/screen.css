@@ -574,11 +574,11 @@ body {
     color: #fff;
     padding: 11px 16px;
     line-height: 24px;
-    width: 4vw;
+    width: 50px;
     outline: none;
     border: none;
     border-radius: 100%;
-    margin: 1em;
+    margin: 0.5em;
 }
 
 .c-grid-buttons{
