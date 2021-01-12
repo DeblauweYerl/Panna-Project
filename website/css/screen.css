@@ -52,9 +52,7 @@ h3 {
     font-weight: 700;
 }
 
-button{
-    margin-left: 24px;
-}
+
 
 h1 {
     font-size: 16px;
@@ -152,6 +150,20 @@ body {
     border: none;
 }
 
+.c-button__blue {
+    font-size: 16px;
+    font-weight: 700;   
+    background-color: var(--main-color);
+    color: #fff;
+    padding: 11px 16px;
+    line-height: 24px;
+    width:70vw;
+    outline: none;
+    border-radius: 100px;
+    border: none;
+}
+
+
 
 .c-button:active {
     background-color: var(--main-color-dark);
@@ -212,19 +224,6 @@ body {
     width: 187px;
   }
   
-  
-  #playButton {
-    display: block;
-  }
-  
-  #pauseButton {
-    display: none;
-  }
-
-
-
-
-
 
 /*the container must be positioned relative:*/
 .custom-select {
@@ -542,6 +541,7 @@ body {
     position: static;
 }
 
+
 .c-button {
     font-size: 16px;
     font-weight: 700;    
@@ -677,6 +677,19 @@ tr:nth-child(even) {
         justify-content: center;
         align-items: center;
     }
+
+    .c-button__blue {
+        font-size: 16px;
+        font-weight: 700;    
+        background-color: var(--main-color);
+        color: #fff;
+        padding: 11px 16px;
+        line-height: 24px;
+        width: 70vw;
+        outline: none;
+        border: none;
+        border-radius: 100px;
+    }
     .align-button{
         position:absolute;                  
         bottom: 0em; 
@@ -741,6 +754,19 @@ tr:nth-child(even) {
         font-size: 16px;
         font-weight: 700;   
         background-color: var(--third-color);
+        color: #fff;
+        padding: 11px 16px;
+        line-height: 24px;
+        width:400px;
+        outline: none;
+        border-radius: 100px;
+        border: none;
+    }
+
+    .c-button__blue {
+        font-size: 16px;
+        font-weight: 700;   
+        background-color: var(--main-color);
         color: #fff;
         padding: 11px 16px;
         line-height: 24px;
