@@ -5,6 +5,11 @@ const socketio = io(lanIP);
 let btn_start_singleplayer, singleplayer_naam, singleplayer_moeilijkheidgraad, btn_stop_singleplayer,end_singleplayer_text;
 let singleplayer_tijd=0;
 
+//custom game mode buttons
+let btn_custom_stop, btn_custom_1, btn_custom_2, btn_custom_3 ,btn_custom_4, btn_custom_5, btn_custom_6, btn_custom_7, btn_custom_8;
+
+
+//LISTEN TO PAGES
 const listenToSingleplayer=function(){
 
     btn_start_singleplayer.addEventListener("click", function() {
@@ -17,7 +22,6 @@ const listenToSingleplayer=function(){
     })  
 };
 
-
 const listenToSingleplayerGame=function(){
     console.log("test");
     btn_stop_singleplayer.addEventListener("click", function() {
@@ -28,6 +32,37 @@ const listenToSingleplayerGame=function(){
     })  
 };
 
+const listenToCustomGameMode= function(){
+    btn_custom_1.addEventListener("click", function() {
+        socketio.emit("F2B_ledselection", {led: 0});
+    })  
+    btn_custom_2.addEventListener("click", function() {
+        socketio.emit("F2B_ledselection", {led: 1});
+    })  
+    btn_custom_3.addEventListener("click", function() {
+        socketio.emit("F2B_ledselection", {led: 2});
+    })  
+    btn_custom_4.addEventListener("click", function() {
+        socketio.emit("F2B_ledselection", {led: 3});
+    })  
+    btn_custom_5.addEventListener("click", function() {
+        socketio.emit("F2B_ledselection", {led: 4});
+    })  
+    btn_custom_6.addEventListener("click", function() {
+        socketio.emit("F2B_ledselection", {led: 5});
+    })  
+    btn_custom_7.addEventListener("click", function() {
+        socketio.emit("F2B_ledselection", {led: 6});
+    })  
+    btn_custom_8.addEventListener("click", function() {
+        socketio.emit("F2B_ledselection", {led: 7});
+    }) 
+    btn_custom_stop .addEventListener("click", function() {
+        socketio.emit("F2B_custom_stop");
+        window.location.href=`singleplayer.html`;
+    }) 
+}
+
 const listenToEndgameSingleplayer= function(){
     const urlParams = new URLSearchParams(window.location.search);
     const tijd = urlParams.get('time');
@@ -35,6 +70,9 @@ const listenToEndgameSingleplayer= function(){
     document.querySelector('.js-end-time').innerHTML = `Je hebt het spel voltooid in ${tijd}`
     socketio.emit("F2B_tijd", {sp_tijd: tijd});
 }
+
+
+
 
 const loadScoreboard = function(jsonObject){
     console.log(jsonObject)
@@ -101,6 +139,18 @@ const init = function () {
     btn_start_singleplayer = document.querySelector('.js-start-singleplayer');
     btn_stop_singleplayer = document.querySelector('.js-stop-game-singleplayer');
     end_singleplayer_text = document.querySelector('.js-end-time')
+
+    //custom game mode buttons
+    btn_custom_1 = document.querySelector('.js-btn-1');
+    btn_custom_2 = document.querySelector('.js-btn-2');
+    btn_custom_3 = document.querySelector('.js-btn-3');
+    btn_custom_4 = document.querySelector('.js-btn-4');
+    btn_custom_5 = document.querySelector('.js-btn-5');
+    btn_custom_6 = document.querySelector('.js-btn-6');
+    btn_custom_7 = document.querySelector('.js-btn-7');
+    btn_custom_8 = document.querySelector('.js-btn-8');
+    btn_custom_stop = document.querySelector('.js-stop-game'); 
+
     loadSocketListeners();
     if(btn_start_singleplayer!=null){
         button.disabled=true;
@@ -112,6 +162,9 @@ const init = function () {
     }
     if(end_singleplayer_text!=null){
         listenToEndgameSingleplayer();
+    }
+    if(btn_custom_1!=null){
+        listenToCustomGameMode();
     }
 
 };
