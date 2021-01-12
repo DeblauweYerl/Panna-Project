@@ -18,7 +18,13 @@ const listenToSingleplayer=function(){
         singleplayer_moeilijkheidgraad= document.getElementById("js-singleplayer-select").options[document.getElementById("js-singleplayer-select").selectedIndex].value;
         socketio.emit("F2B_start_singleplayer", {sp_naam: singleplayer_naam, sp_moeilijkheidsgraad: singleplayer_moeilijkheidgraad});
         console.log(singleplayer_moeilijkheidgraad);
-        window.location.href="singleplayerGame.html";
+
+        if (singleplayer_moeilijkheidgraad == "Aangepast"){
+            window.location.href="customGameMode.html";
+        }
+        else{
+            window.location.href="singleplayerGame.html";
+        }
     })  
 };
 
