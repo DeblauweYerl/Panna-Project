@@ -682,12 +682,12 @@ tr:nth-child(even) {
 
     .small-table-body{
         height: 25vh;
-        margin-bottom: 3em;
+        margin-bottom: 2em;
     }
     .c-grid {
         display: grid;
         background-color: var(--main-color);
-        padding-bottom: 2em;
+        padding-bottom: 0em;
         opacity: 1;
         width: 95%;
         row-gap: 0.3em;
@@ -714,7 +714,7 @@ tr:nth-child(even) {
         border-radius: 100px;
     }
     .align-button{
-        position:absolute;                  
+        position: static;;                  
         bottom: 0em; 
         right: 6%;
         left: 6%;
