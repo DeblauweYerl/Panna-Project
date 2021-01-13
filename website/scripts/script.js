@@ -2,7 +2,7 @@
 let playername, button;
 const lanIP = `${window.location.hostname}:5010`; //ip adres automatisch opvragen met ${window.location.hostname}
 const socketio = io(lanIP);
-let btn_start_singleplayer, singleplayer_naam, singleplayer_moeilijkheidgraad, btn_stop_singleplayer,end_singleplayer_text, btn_start_multiplayer, btn_stop_multiplayer;
+let btn_start_singleplayer, singleplayer_naam, singleplayer_moeilijkheidgraad, btn_stop_singleplayer,end_singleplayer_text, btn_start_multiplayer, btn_stop_multiplayer, multiplayer_winner;
 let singleplayer_tijd=0;
 
 //custom game mode buttons
@@ -13,7 +13,7 @@ let btn_custom_stop, btn_custom_1, btn_custom_2, btn_custom_3 ,btn_custom_4, btn
 const listenToSingleplayer=function(){
     btn_start_singleplayer.addEventListener("click", function() {
         //singleplayer starten
-        singleplayer_naam= document.querySelector(".js_singleplayer_naam").value;
+        singleplayer_naam= document.querySelector(".js-playername").value;
         singleplayer_moeilijkheidgraad= document.getElementById("js-singleplayer-select").options[document.getElementById("js-singleplayer-select").selectedIndex].value;
         socketio.emit("F2B_start_singleplayer", {sp_name: singleplayer_naam, sp_difficulty: singleplayer_moeilijkheidgraad});
         console.log(singleplayer_moeilijkheidgraad);
@@ -74,19 +74,19 @@ const listenToEndgameSingleplayer= function(){
     document.querySelector('.js-end-time').innerHTML = `Je hebt het spel voltooid in ${time}`
     socketio.emit("F2B_end_singleplayer", {time: time});
 }
-// const loadScoreboard = function(jsonObject){
-//     console.log(jsonObject)
-//     for(const element of jsonObject){
-//         elementenHTML+=
-//         `<tr>
-//             <td>${element.index}</td>
-//             <td>${element.name}</td>
-//             <td>${element.time}</td>
-//         </tr>`
-//         ;
-//     }
-//     document.querySelector('.js-scoreboard').innerHTML=elementenHTML;
-// }
+const loadScoreboard = function(jsonObject){
+    console.log(jsonObject)
+    for(const element of jsonObject){
+        elementenHTML+=
+        `<tr>
+            <td>${element.index}</td>
+            <td>${element.name}</td>
+            <td>${element.time}</td>
+        </tr>`
+        ;
+    }
+    document.querySelector('.js-scoreboard').innerHTML=elementenHTML;
+}
 
 
 const listenToMultiplayer = function () {
@@ -122,6 +122,10 @@ const listenToMultiplayerGame = function () {
         let winner = data.winner;
         window.location.href=`winnerMultiplayer.html?winner=${winner}`
     });
+};
+const listenToEndgameMultiplayer = function() {
+    const urlParams = new URLSearchParams(window.location.search);
+    document.querySelector('.js-winner').innerHTML = urlParams.get('winner');
 };
 
 const loadSocketListeners = function () {
@@ -168,19 +172,17 @@ const eventListenersToevoegen = function () {
 };
 
 const init = function () {
-    console.log('init')
     button = document.querySelector('input[type=button]');
 
     //singleplayer
     btn_start_singleplayer = document.querySelector('.js-start-singleplayer');
     btn_stop_singleplayer = document.querySelector('.js-stop-game-singleplayer');
-    btn_start_multiplayer = document.querySelector('.js-start-multiplayer')
-    btn_stop_multiplayer = document.querySelector('.js-stop-multiplayer')
-    end_singleplayer_text = document.querySelector('.js-end-time')
+    end_singleplayer_text = document.querySelector('.js-end-time');
 
     //multiplayer
     btn_start_multiplayer = document.querySelector('.js-start-multiplayer');
-    btn_stop_multiplayer= document.querySelector('.js-stop-multiplayer');
+    btn_stop_multiplayer = document.querySelector('.js-stop-multiplayer');
+    multiplayer_winner = document.querySelector('.js-winner')
 
     //custom game mode buttons
     btn_custom_1 = document.querySelector('.js-btn-1');
@@ -194,7 +196,6 @@ const init = function () {
     btn_custom_stop = document.querySelector('.js-stop-game'); 
 
     loadSocketListeners();
-    loadScoreboard();
     if(btn_start_singleplayer!=null){
         playername = document.querySelector('.js-playername');
         button.disabled=true;
@@ -212,6 +213,9 @@ const init = function () {
     }
     else if(btn_stop_multiplayer!=null){
         listenToMultiplayerGame();
+    }
+    else if(multiplayer_winner!=null){
+        listenToEndgameMultiplayer();
     }
 };
 
