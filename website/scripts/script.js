@@ -230,7 +230,6 @@ const init = function () {
         btn_start_multiplayer.disabled = true;
         playername1 = document.querySelector('.js-player1-name');
         playername2 = document.querySelector('.js-player2-name');
-        eventListenersToevoegenMP();
         listenToMultiplayer();
     }
     else if(btn_stop_multiplayer!=null){
