@@ -603,11 +603,12 @@ body {
     color: #fff;
     padding: 11px 16px;
     line-height: 24px;
-    width: 50px;
+    width: 45px;
     outline: none;
     border: none;
     border-radius: 100%;
     margin: 0.5em;
+    margin-bottom: 1em;
 }
 
 .c-grid-buttons{
@@ -666,6 +667,21 @@ tr:nth-child(even) {
     button{
         margin: 0px;
     }
+    .c-button-small
+{
+    font-size: 16px;
+    font-weight: 700;    
+    background-color: var(--main-color);
+    color: #fff;
+    padding: 11px 16px;
+    line-height: 24px;
+    width: 50px;
+    outline: none;
+    border: none;
+    border-radius: 100%;
+    margin: 0.5em;
+    margin-bottom: 1em;
+}
 }
 
 @media (min-width:374px){
