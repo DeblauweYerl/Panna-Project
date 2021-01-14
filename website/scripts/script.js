@@ -11,10 +11,7 @@ let btn_custom_stop, btn_custom_1, btn_custom_2, btn_custom_3 ,btn_custom_4, btn
 
 //LISTEN TO PAGES
 const listenToSingleplayer=function(){
-    socketio.on("B2F_scoreboard",function(jsonObject){
-        console.log("Getting json of scoreboard");
-        loadScoreboard(jsonObject);
-    });
+    handleData("http://127.0.0.1:5000/api/scoreboard/0", loadScoreboard);
     btn_start_singleplayer.addEventListener("click", function() {
         //singleplayer starten
         singleplayer_naam= document.querySelector(".js-playername").value;
@@ -28,80 +25,81 @@ const listenToSingleplayer=function(){
         else{
             window.location.href="singleplayerGame.html";
         }
-    })  
+    });
     scoreboard_select.addEventListener("click", function() {
         scoreboard_moeilijkheidgraad= document.getElementById("js-singleplayer-select").options[document.getElementById("js-singleplayer-select").selectedIndex].value;
         console.log(scoreboard_moeilijkheidgraad);
-        //load scoreboard per moeilijkheidsgraad 
-    }) 
+        handleData(`http://127.0.0.1:5000/api/scoreboard/${scoreboard_moeilijkheidgraad}`, loadScoreboard);
+    });
 };
 
 const listenToSingleplayerGame=function(){
     btn_stop_singleplayer.addEventListener("click", function() {
         window.location.href=`singleplayer.html`;
         socketio.emit('F2B_stop_game');
-    })  
+    });
 };
 
 const listenToCustomGameMode= function(){
     btn_custom_1.addEventListener("click", function() {
         socketio.emit("F2B_ledselection", {led: 0});
-    })  
+    });
     btn_custom_2.addEventListener("click", function() {
         socketio.emit("F2B_ledselection", {led: 1});
-    })  
+    });
     btn_custom_3.addEventListener("click", function() {
         socketio.emit("F2B_ledselection", {led: 2});
-    })  
+    });
     btn_custom_4.addEventListener("click", function() {
         socketio.emit("F2B_ledselection", {led: 3});
-    })  
+    });
     btn_custom_5.addEventListener("click", function() {
         socketio.emit("F2B_ledselection", {led: 4});
-    })  
+    });
     btn_custom_6.addEventListener("click", function() {
         socketio.emit("F2B_ledselection", {led: 5});
-    })  
+    });
     btn_custom_7.addEventListener("click", function() {
         socketio.emit("F2B_ledselection", {led: 6});
-    })  
+    });
     btn_custom_8.addEventListener("click", function() {
         socketio.emit("F2B_ledselection", {led: 7});
-    }) 
+    });
     btn_custom_stop.addEventListener("click", function() {
         socketio.emit("F2B_custom_stop");
         window.location.href=`singleplayer.html`;
-    }) 
-}
+    });
+};
 
 const listenToEndgameSingleplayer= function(){
     const urlParams = new URLSearchParams(window.location.search);
     const time = urlParams.get('time');
     document.querySelector('.js-end-time').innerHTML = `Je hebt het spel voltooid in ${time}`
     socketio.emit("F2B_end_singleplayer", {time: time});
-}
+};
 
 const listenToScoreboard= function(){
     scoreboard_select.addEventListener("click", function() {
         scoreboard_moeilijkheidgraad= document.getElementById("js-scoreboard-select").options[document.getElementById("js-scoreboard-select").selectedIndex].value;
         console.log(scoreboard_moeilijkheidgraad);
-        //load scoreboard per moeilijkheidsgraad 
-    }) 
-}
+        handleData(`http://127.0.0.1:5000/api/scoreboard/${scoreboard_moeilijkheidgraad}`, loadScoreboard);
+    });
+};
 
 const loadScoreboard = function(jsonObject){
     console.log(jsonObject)
+    let position = 1;
     for(const element of jsonObject){
         elementenHTML+=
         `<tr>
-            <td>${element.index}</td>
+            <td>${position}</td>
             <td>${element.name}</td>
             <td>${element.time}</td>
-        </tr>`
-        ;
-    }
+        </tr>`;
+        position++;
+    };
     document.querySelector('.js-scoreboard').innerHTML=elementenHTML;
-}
+};
 
 
 const listenToMultiplayer = function () {
@@ -165,7 +163,6 @@ const checkValues = function () {
     if (playername.value.length >0 && playername.value.length <= 14) {
         button.disabled = false;
         //word meerdere keren opgeroepen door input
-        
     } else {
         button.disabled = true;
     }
@@ -173,25 +170,20 @@ const checkValues = function () {
 
 const checkValuesMultiplayer = function () {
     if (playername1.value.length >0 && playername1.value.length <= 14 && playername2.value.length >0 && playername2.value.length <= 14) {
-        console.log("koekjes")
         btn_start_multiplayer.disabled = false;
         //word meerdere keren opgeroepen door input
-        
     } else {
         btn_start_multiplayer.disabled = true;
-        console.log(" geen koekjes")
     }
 };
 
 const eventListenersToevoegen = function () {
     playername.addEventListener('input', checkValues);
-   
 };
 
 const eventListenersToevoegenMP = function () {
     playername1.addEventListener('input', checkValuesMultiplayer);
     playername2.addEventListener('input', checkValuesMultiplayer);
-   
 };
 
 const init = function () {
