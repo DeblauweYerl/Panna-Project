@@ -700,6 +700,20 @@ tr:nth-child(even) {
         align-items: center;
     }
 
+
+.item_sp{
+    width:600px;
+    height: 96%;
+    border-radius: 25px;
+    background: var(--secondary-color);
+    text-align: center;
+    padding: auto;
+    padding: auto;  
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
     .small-table-body{
         height: 25vh;
         margin-bottom: 2em;
