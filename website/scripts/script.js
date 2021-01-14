@@ -109,6 +109,8 @@ const listenToMultiplayer = function () {
         socketio.emit('F2B_start_multiplayer', {player1_name: player1_name, player2_name: player2_name});
         window.location.href=`startMultiplayer.html?player1=${player1_name}&player2=${player2_name}`;
     });
+    playername1.addEventListener('input', checkValuesMultiplayer);
+    playername2.addEventListener('input', checkValuesMultiplayer);
 };
 const listenToMultiplayerGame = function () {
     const urlParams = new URLSearchParams(window.location.search);
@@ -181,10 +183,6 @@ const eventListenersToevoegen = function () {
     playername.addEventListener('input', checkValues);
 };
 
-const eventListenersToevoegenMP = function () {
-    playername1.addEventListener('input', checkValuesMultiplayer);
-    playername2.addEventListener('input', checkValuesMultiplayer);
-};
 
 const init = function () {
     button = document.querySelector('input[type=button]');
@@ -209,13 +207,12 @@ const init = function () {
     btn_custom_6 = document.querySelector('.js-btn-6');
     btn_custom_7 = document.querySelector('.js-btn-7');
     btn_custom_8 = document.querySelector('.js-btn-8');
-    btn_custom_stop = document.querySelector('.js-stop-game'); 
+    btn_custom_stop = document.querySelector('.js-stop-game');
 
     loadSocketListeners();
 
     if(btn_start_singleplayer!=null){
         playername = document.querySelector('.js-playername');
-       
         button.disabled=true;
         eventListenersToevoegen();
         listenToSingleplayer(playername);
@@ -233,7 +230,7 @@ const init = function () {
         btn_start_multiplayer.disabled = true;
         playername1 = document.querySelector('.js-player1-name');
         playername2 = document.querySelector('.js-player2-name');
-        eventListenersToevoegenMP()
+        eventListenersToevoegenMP();
         listenToMultiplayer();
     }
     else if(btn_stop_multiplayer!=null){
@@ -245,10 +242,9 @@ const init = function () {
     else if(scoreboard_select!=null){
         listenToScoreboard();
     }
-    
 };
 
 document.addEventListener('DOMContentLoaded', function () {
-    console.info("DOM content is loaded")
+    console.info("DOM content is loaded");
     init();
 });
