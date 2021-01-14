@@ -2,7 +2,7 @@
 let playername, button;
 const lanIP = `${window.location.hostname}:5010`; //ip adres automatisch opvragen met ${window.location.hostname}
 const socketio = io(lanIP);
-let btn_start_singleplayer, singleplayer_naam, singleplayer_moeilijkheidgraad, btn_stop_singleplayer,end_singleplayer_text, btn_start_multiplayer, btn_stop_multiplayer, multiplayer_winner;
+let btn_start_singleplayer, singleplayer_naam, singleplayer_moeilijkheidgraad, btn_stop_singleplayer,end_singleplayer_text, btn_start_multiplayer, btn_stop_multiplayer, multiplayer_winner, playername1, playername2, btnMultiplayer;
 let singleplayer_tijd=0;
 
 //custom game mode buttons
@@ -158,8 +158,27 @@ const checkValues = function () {
     }
 };
 
+const checkValuesMultiplayer = function () {
+    if (playername1.value.length >0 && playername1.value.length <= 14 && playername2.value.length >0 && playername2.value.length <= 14) {
+        console.log("koekjes")
+        btn_start_multiplayer.disabled = false;
+        //word meerdere keren opgeroepen door input
+        
+    } else {
+        btn_start_multiplayer.disabled = true;
+        console.log(" geen koekjes")
+    }
+};
+
 const eventListenersToevoegen = function () {
     playername.addEventListener('input', checkValues);
+   
+};
+
+const eventListenersToevoegenMP = function () {
+    playername1.addEventListener('input', checkValuesMultiplayer);
+    playername2.addEventListener('input', checkValuesMultiplayer);
+   
 };
 
 const init = function () {
@@ -169,7 +188,7 @@ const init = function () {
     btn_start_singleplayer = document.querySelector('.js-start-singleplayer');
     btn_stop_singleplayer = document.querySelector('.js-stop-game-singleplayer');
     end_singleplayer_text = document.querySelector('.js-end-time');
-
+    
     //multiplayer
     btn_start_multiplayer = document.querySelector('.js-start-multiplayer');
     btn_stop_multiplayer = document.querySelector('.js-stop-multiplayer');
@@ -187,8 +206,10 @@ const init = function () {
     btn_custom_stop = document.querySelector('.js-stop-game'); 
 
     loadSocketListeners();
+
     if(btn_start_singleplayer!=null){
         playername = document.querySelector('.js-playername');
+       
         button.disabled=true;
         eventListenersToevoegen();
         listenToSingleplayer(playername);
@@ -203,6 +224,10 @@ const init = function () {
         listenToCustomGameMode();
     }
     else if(btn_start_multiplayer!=null){
+        btn_start_multiplayer.disabled = true;
+        playername1 = document.querySelector('.js-player1-name');
+        playername2 = document.querySelector('.js-player2-name');
+        eventListenersToevoegenMP()
         listenToMultiplayer();
     }
     else if(btn_stop_multiplayer!=null){
