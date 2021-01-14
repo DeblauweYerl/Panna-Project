@@ -623,7 +623,7 @@ tbody {
 }
 
 .small-table-body{
-    height: 25vh;
+    height: 15vh;
     margin-bottom: 1em;
 }
 
@@ -718,7 +718,7 @@ tr:nth-child(even) {
 }
 
     .small-table-body{
-        height: 25vh;
+        height: 15vh;
         margin-bottom: 2em;
     }
     .c-grid {

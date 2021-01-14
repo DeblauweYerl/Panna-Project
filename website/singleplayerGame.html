@@ -26,7 +26,7 @@
                 <div>
 
                 <input type="button" class=" btn c-button pauseButton js-pauze-timer" value="Pauze" ></input>
-                <input type="button" class=" btn c-button pauseButton js-continue-timer" value="Hervat"  ></input>
+                <input type="button" class=" btn c-button playButton js-continue-timer" value="Hervat"  ></input>
                 <input type="button" class=" btn c-button pauseButton js-stop-game-singleplayer"  value="Stop het spel"></input>
               </div>
     </div>  
@@ -84,13 +84,14 @@
           function showButton(buttonKey) {
             const buttonToShow = buttonKey === "PLAY" ? playButton : pauseButton;
             const buttonToHide = buttonKey === "PLAY" ? pauseButton : playButton;
-            buttonToShow.style.display = "absolute";
+            buttonToShow.style.display = "inline";
             buttonToHide.style.display = "none";
+            
           }
           // Create event listeners
           
-          let playButton = document.querySelector('.js-pauze-timer');
-          let pauseButton = document.querySelector('.js-continue-timer');
+          let playButton = document.querySelector('.js-continue-timer');
+          let pauseButton = document.querySelector('.js-pauze-timer');
           start();         
           playButton.addEventListener("click", start);
           pauseButton.addEventListener("click", pause);
