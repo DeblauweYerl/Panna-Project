@@ -54,7 +54,7 @@ h3 {
 
 
 h1 {
-    font-size: 16px;
+    font-size: 24px;
     line-height: 24px;
     margin: 0 0 24px;
 }
@@ -66,7 +66,7 @@ h2 {
 }
 
 h3 {
-    font-size: 26px;
+    font-size: 16px;
     line-height: 32px;
     margin: 0 0 24px;
 }
@@ -403,7 +403,7 @@ body {
 
 .container {
     display: grid;
-    height: 96vh;
+    height: 95vh;
     grid-template-rows: auto;
     justify-items: center;
     background: var(--main-color);
@@ -674,6 +674,9 @@ tr:nth-child(even) {
         font-size: 32px;
         line-height: 48px;
         margin: 0 0 24px;
+    }
+    h3{
+        font-size: 24px;
     }
 
     .svg-icon{
