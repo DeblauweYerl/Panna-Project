@@ -523,6 +523,14 @@ body {
     border-color: var(--secondary-color);
 }
 
+.align-button_mp{
+    position: absolute;                  
+    bottom: 0em; 
+    right: 6%;
+    left: 6%;
+    margin-left: auto;
+    margin-right: auto;
+}
 
 .c-input-dark {
     -webkit-appearance: none;
@@ -714,7 +722,7 @@ tr:nth-child(even) {
         border-radius: 100px;
     }
     .align-button{
-        position: static;;                  
+        position: static;                  
         bottom: 0em; 
         right: 6%;
         left: 6%;
@@ -722,6 +730,14 @@ tr:nth-child(even) {
         margin-right: auto;
     }
 
+    .align-button_mp{
+        position: absolute;                  
+        bottom: 0em; 
+        right: 6%;
+        left: 6%;
+        margin-left: auto;
+        margin-right: auto;
+    }
     .whitespace{
         padding-top: 100px;
     }
