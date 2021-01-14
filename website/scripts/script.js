@@ -2,7 +2,7 @@
 let playername, button;
 const lanIP = `${window.location.hostname}:5010`; //ip adres automatisch opvragen met ${window.location.hostname}
 const socketio = io(lanIP);
-let btn_start_singleplayer, singleplayer_naam, singleplayer_moeilijkheidgraad, btn_stop_singleplayer,end_singleplayer_text, btn_start_multiplayer, btn_stop_multiplayer, multiplayer_winner, playername1, playername2, btnMultiplayer;
+let scoreboard_select, scoreboard_moeilijkheidgraad, btn_start_singleplayer, singleplayer_naam, singleplayer_moeilijkheidgraad, btn_stop_singleplayer,end_singleplayer_text, btn_start_multiplayer, btn_stop_multiplayer, multiplayer_winner, playername1, playername2, btnMultiplayer;
 let singleplayer_tijd=0;
 
 //custom game mode buttons
@@ -30,7 +30,6 @@ const listenToSingleplayer=function(){
         }
     })  
 };
-
 
 const listenToSingleplayerGame=function(){
     btn_stop_singleplayer.addEventListener("click", function() {
@@ -64,7 +63,7 @@ const listenToCustomGameMode= function(){
     btn_custom_8.addEventListener("click", function() {
         socketio.emit("F2B_ledselection", {led: 7});
     }) 
-    btn_custom_stop .addEventListener("click", function() {
+    btn_custom_stop.addEventListener("click", function() {
         socketio.emit("F2B_custom_stop");
         window.location.href=`singleplayer.html`;
     }) 
@@ -76,6 +75,17 @@ const listenToEndgameSingleplayer= function(){
     document.querySelector('.js-end-time').innerHTML = `Je hebt het spel voltooid in ${time}`
     socketio.emit("F2B_end_singleplayer", {time: time});
 }
+
+const listenToScoreboard= function(){
+    console.log("test");
+    scoreboard_select.addEventListener("change", function() {
+        console.log("test2");
+        scoreboard_moeilijkheidgraad= document.getElementById("js-scoreboard-select").options[document.getElementById("js-scoreboard-select").selectedIndex].value;
+        console.log(scoreboard_moeilijkheidgraad);
+        socketio.emit("F2B_scoreboard-select", {moeilijkheidgraad: scoreboard_moeilijkheidgraad});
+    }) 
+}
+
 const loadScoreboard = function(jsonObject){
     console.log(jsonObject)
     for(const element of jsonObject){
@@ -188,7 +198,8 @@ const init = function () {
     btn_start_singleplayer = document.querySelector('.js-start-singleplayer');
     btn_stop_singleplayer = document.querySelector('.js-stop-game-singleplayer');
     end_singleplayer_text = document.querySelector('.js-end-time');
-    
+    scoreboard_select = document.querySelector(".js-scoreboard-select1");
+
     //multiplayer
     btn_start_multiplayer = document.querySelector('.js-start-multiplayer');
     btn_stop_multiplayer = document.querySelector('.js-stop-multiplayer');
@@ -236,6 +247,10 @@ const init = function () {
     else if(multiplayer_winner!=null){
         listenToEndgameMultiplayer();
     }
+    else if(scoreboard_select!=null){
+        listenToScoreboard();
+    }
+    
 };
 
 document.addEventListener('DOMContentLoaded', function () {
