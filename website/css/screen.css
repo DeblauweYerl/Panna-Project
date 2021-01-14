@@ -54,7 +54,7 @@ h3 {
 
 
 h1 {
-    font-size: 16px;
+    font-size: 24px;
     line-height: 24px;
     margin: 0 0 24px;
 }
@@ -66,7 +66,7 @@ h2 {
 }
 
 h3 {
-    font-size: 26px;
+    font-size: 16px;
     line-height: 32px;
     margin: 0 0 24px;
 }
@@ -245,7 +245,7 @@ body {
   .select-selected:after {
     position: absolute;
     content: "";
-    top: 14px;
+    top: 23px;
     right: 10px;
     width: 0;
     height: 0;
@@ -256,7 +256,7 @@ body {
   /*point the arrow upwards when the select box is open (active):*/
   .select-selected.select-arrow-active:after {
     border-color: transparent transparent #fff transparent;
-    top: 7px;
+    top: 15px;
   }
   
   /*style the items (options), including the selected item:*/
@@ -403,7 +403,7 @@ body {
 
 .container {
     display: grid;
-    height: 96vh;
+    height: 95vh;
     grid-template-rows: auto;
     justify-items: center;
     background: var(--main-color);
@@ -433,6 +433,18 @@ body {
     align-items: center;
     
   }
+
+.item_sp{
+    width:90%;
+    height: 96%;
+    border-radius: 25px;
+    background: var(--secondary-color);
+    text-align: center;
+    padding: auto;  
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
 .c-rank__uneven {
     display: flex;
@@ -663,6 +675,9 @@ tr:nth-child(even) {
         line-height: 48px;
         margin: 0 0 24px;
     }
+    h3{
+        font-size: 24px;
+    }
 
     .svg-icon{
         width:185;
@@ -687,6 +702,20 @@ tr:nth-child(even) {
         justify-content: center;
         align-items: center;
     }
+
+
+.item_sp{
+    width:600px;
+    height: 96%;
+    border-radius: 25px;
+    background: var(--secondary-color);
+    text-align: center;
+    padding: auto;
+    padding: auto;  
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
     .small-table-body{
         height: 25vh;
