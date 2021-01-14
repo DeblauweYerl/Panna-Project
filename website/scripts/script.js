@@ -29,6 +29,11 @@ const listenToSingleplayer=function(){
             window.location.href="singleplayerGame.html";
         }
     })  
+    scoreboard_select.addEventListener("click", function() {
+        scoreboard_moeilijkheidgraad= document.getElementById("js-singleplayer-select").options[document.getElementById("js-singleplayer-select").selectedIndex].value;
+        console.log(scoreboard_moeilijkheidgraad);
+        //load scoreboard per moeilijkheidsgraad 
+    }) 
 };
 
 const listenToSingleplayerGame=function(){
@@ -77,12 +82,10 @@ const listenToEndgameSingleplayer= function(){
 }
 
 const listenToScoreboard= function(){
-    console.log("test");
-    scoreboard_select.addEventListener("change", function() {
-        console.log("test2");
-        // scoreboard_moeilijkheidgraad= document.getElementById("js-scoreboard-select").options[document.getElementById("js-scoreboard-select").selectedIndex].value;
-        // console.log(scoreboard_moeilijkheidgraad);
-        // socketio.emit("F2B_scoreboard-select", {moeilijkheidgraad: scoreboard_moeilijkheidgraad});
+    scoreboard_select.addEventListener("click", function() {
+        scoreboard_moeilijkheidgraad= document.getElementById("js-scoreboard-select").options[document.getElementById("js-scoreboard-select").selectedIndex].value;
+        console.log(scoreboard_moeilijkheidgraad);
+        //load scoreboard per moeilijkheidsgraad 
     }) 
 }
 
@@ -198,7 +201,7 @@ const init = function () {
     btn_start_singleplayer = document.querySelector('.js-start-singleplayer');
     btn_stop_singleplayer = document.querySelector('.js-stop-game-singleplayer');
     end_singleplayer_text = document.querySelector('.js-end-time');
-    scoreboard_select = document.querySelector(".js-scoreboard-select1");
+    scoreboard_select = document.querySelector(".select-selected");
 
     //multiplayer
     btn_start_multiplayer = document.querySelector('.js-start-multiplayer');
