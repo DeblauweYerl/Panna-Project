@@ -434,6 +434,18 @@ body {
     
   }
 
+.item_sp{
+    width:90%;
+    height: 96%;
+    border-radius: 25px;
+    background: var(--secondary-color);
+    text-align: center;
+    padding: auto;  
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .c-rank__uneven {
     display: flex;
     flex-direction: column;
