@@ -11,6 +11,10 @@ let btn_custom_stop, btn_custom_1, btn_custom_2, btn_custom_3 ,btn_custom_4, btn
 
 //LISTEN TO PAGES
 const listenToSingleplayer=function(){
+    socketio.on("B2F_scoreboard",function(jsonObject){
+        console.log("Getting json of scoreboard");
+        loadScoreboard(jsonObject);
+    });
     btn_start_singleplayer.addEventListener("click", function() {
         //singleplayer starten
         singleplayer_naam= document.querySelector(".js-playername").value;
@@ -18,7 +22,7 @@ const listenToSingleplayer=function(){
         socketio.emit("F2B_start_singleplayer", {sp_name: singleplayer_naam, sp_difficulty: singleplayer_moeilijkheidgraad});
         console.log(singleplayer_moeilijkheidgraad);
 
-        if (singleplayer_moeilijkheidgraad == "Aangepast"){
+        if (singleplayer_moeilijkheidgraad == "-1"){
             window.location.href="customGameMode.html";
         }
         else{
@@ -30,10 +34,8 @@ const listenToSingleplayer=function(){
 
 const listenToSingleplayerGame=function(){
     btn_stop_singleplayer.addEventListener("click", function() {
-        // navigeren naar endgameSingleplayer.html
-        singleplayer_tijd = document.querySelector(".time").textContent;
-        console.log(singleplayer_tijd);
-        window.location.href=`endgameSingleplayer.html?time=${singleplayer_tijd}`;
+        window.location.href=`singleplayer.html`;
+        socketio.emit('F2B_stop_game');
     })  
 };
 
@@ -104,7 +106,7 @@ const listenToMultiplayerGame = function () {
     let html_player1_score = document.querySelector('.js-player1-score');
     let html_player2_score = document.querySelector('.js-player2-score');
     btn_stop_multiplayer.addEventListener('click', function(){
-        //hier moet nog een socketio emit om het spel in de backend te stoppen
+        socketio.emit('F2B_stop_game');
         window.location.href=`multiplayer.html`;
     });
     socketio.on('B2F_multiplayer_score', function(data) {
@@ -129,15 +131,6 @@ const listenToEndgameMultiplayer = function() {
 };
 
 const loadSocketListeners = function () {
-    socketio.on("message",function(msg){
-     console.log("printing message from backend");
-     document.querySelector('.js-messages').innerHTML+= `${msg}<br>`;
-    });
-
-    socketio.on("B2F_scoreboard",function(jsonObject){
-        console.log("Getting json of scoreboard")
-        loadScoreboard(jsonObject)
-       })
 
     socketio.on('B2F_client_connected',function(msg){
       console.log(`Server Responded:${msg}`);
@@ -145,8 +138,6 @@ const loadSocketListeners = function () {
 
     socketio.on('B2F_stop_game',function(msg){
         console.log(`game stoppen`);
-        // tijd stoppen
-        document.getElementById("pauseButton").click(); // Click on the button to stop
         // tijd ophalen van de timer
         singleplayer_tijd = document.querySelector(".time").textContent;
         console.log(singleplayer_tijd);
@@ -207,6 +198,9 @@ const init = function () {
     }
     else if(end_singleplayer_text!=null){
         listenToEndgameSingleplayer();
+    }
+    else if(btn_custom_1!=null){
+        listenToCustomGameMode();
     }
     else if(btn_start_multiplayer!=null){
         listenToMultiplayer();
