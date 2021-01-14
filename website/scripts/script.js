@@ -80,9 +80,9 @@ const listenToScoreboard= function(){
     console.log("test");
     scoreboard_select.addEventListener("change", function() {
         console.log("test2");
-        scoreboard_moeilijkheidgraad= document.getElementById("js-scoreboard-select").options[document.getElementById("js-scoreboard-select").selectedIndex].value;
-        console.log(scoreboard_moeilijkheidgraad);
-        socketio.emit("F2B_scoreboard-select", {moeilijkheidgraad: scoreboard_moeilijkheidgraad});
+        // scoreboard_moeilijkheidgraad= document.getElementById("js-scoreboard-select").options[document.getElementById("js-scoreboard-select").selectedIndex].value;
+        // console.log(scoreboard_moeilijkheidgraad);
+        // socketio.emit("F2B_scoreboard-select", {moeilijkheidgraad: scoreboard_moeilijkheidgraad});
     }) 
 }
 
