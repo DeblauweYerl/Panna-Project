@@ -41,7 +41,6 @@
      --radius: 25px;
      --radius-lg: 100px;
 
-
       /* Whitespace */    
     /* 
         global font-size = 16px
@@ -603,6 +602,8 @@ body {
 .c-grid-buttons{
     display: grid;
     row-gap: 6em;
+    margin-bottom: 10vh;
+    margin-top: 10vh;
 }
 
 tbody {
