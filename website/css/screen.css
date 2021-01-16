@@ -20,8 +20,7 @@
     0% {opacity:1;}
     100% {opacity:0;}
 
-    }
-
+}
 
 
 :root {
@@ -55,8 +54,6 @@
     --global-whitespace-sm: calc(var(--global-baseline) * 2); /* = 16px */
     --global-whitespace-md: calc(var(--global-baseline) * 3); /* = 24px */
     --global-whitespace-lg: calc(var(--global-baseline) * 4); /* = 32px */
-   
-
 }
 
 
@@ -72,7 +69,6 @@ h2,
 h3 {
     font-weight: 700;
 }
-
 
 h1 {
     font-size: 24px;
@@ -107,9 +103,9 @@ h4{
 
 body {
     background-color: var(--main-color);
-  }
+}
 
-  .c-grid {
+.c-grid {
     display: grid;
     background-color: var(--main-color);
     padding-bottom: 0;
@@ -138,13 +134,9 @@ body {
     margin-bottom: var(--global-whitespace-sm);
 }
 
-
 .fadeout{
     -webkit-animation: fadeOut ease 2s;
 }
-
-
-
   
 /* Style the active class, and buttons on mouse-over */
 .active, .c-button:hover {
@@ -183,8 +175,6 @@ body {
     border: none;
 }
 
-
-
 .c-button:active {
     background-color: var(--main-color-dark);
     box-shadow: none;
@@ -207,10 +197,6 @@ body {
     width:50vw;
 }
 
-
-
-
-
 .stopwatch {
     display: grid;
     justify-items: center;
@@ -219,7 +205,7 @@ body {
     padding-top: var(--global-whitespace-md);
   }
   
-  .circle {
+.circle {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -230,40 +216,37 @@ body {
     border: 2px solid;
     border-radius: 50%;
     margin-bottom: var(--global-whitespace-lg);
-  }
+}
   
-  .time {
+.time {
     font-family: "Roboto Mono", monospace;
     font-weight: 300;
     font-size: 48px;
-  }
+}
   
-  
-  
-  .controls {
+.controls {
     display: flex;
     justify-content: space-between;
   
     width: 187px;
-  }
+}
   
-
 /*the container must be positioned relative:*/
 .custom-select {
     position: relative;
     font-family: Arial;
-  }
+}
   
-  .custom-select select {
+.custom-select select {
     display: none; /*hide original SELECT element:*/
-  }
-  
-  .select-selected {
+}
+
+.select-selected {
     background-color: var(--main-color);
-  }
+}
   
-  /*style the arrow inside the select element:*/
-  .select-selected:after {
+/*style the arrow inside the select element:*/
+.select-selected:after {
     position: absolute;
     content: "";
     top: 23px;
@@ -272,43 +255,41 @@ body {
     height: 0;
     border: 6px solid transparent;
     border-color: #fff transparent transparent transparent;
-  }
+}
   
-  /*point the arrow upwards when the select box is open (active):*/
-  .select-selected.select-arrow-active:after {
+/*point the arrow upwards when the select box is open (active):*/
+.select-selected.select-arrow-active:after {
     border-color: transparent transparent #fff transparent;
     top: 15px;
-  }
+}
   
-  /*style the items (options), including the selected item:*/
-  .select-items div,.select-selected {
+/*style the items (options), including the selected item:*/
+.select-items div,.select-selected {
     color: #ffffff;
     padding: var(--global-whitespace-xxs) var(--global-whitespace-sm);;
     border: 1px solid transparent;
     border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
     cursor: pointer;
     user-select: none;
-  }
+}
   
-  /*style items (options):*/
-  .select-items {
+/*style items (options):*/
+.select-items {
     position: absolute;
     background-color: var(--main-color);
     top: 100%;
     left: 0;
     right: 0;
     z-index: 99;
-  }
+}
   
-  /*hide the items when the select box is closed:*/
-  .select-hide {
-    display: none;
-  }
-  
+/*hide the items when the select box is closed:*/
+.select-hide {
+display: none;
+} 
   .select-items div:hover, .same-as-selected {
     background-color: rgba(0, 0, 0, 0.1);
-  }
-
+}
 
 .dropdown-align-center{
     margin-right: auto;
@@ -316,46 +297,46 @@ body {
     margin-bottom: var(--global-whitespace-sm);
 }
   
-  /* The container <div> - needed to position the dropdown content */
-  .dropdown {
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
     position: relative;
     display: inline-block;
     margin-bottom: var(--global-whitespace-md);
-  }
+}
   
-  /* Dropdown Content (Hidden by Default) */
-  .dropdown-content {
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
     display: none;
     position: absolute;
     background-color: var(--main-color);
     min-width: 240px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
-  }
+}
   
-  /* Links inside the dropdown */
-  .dropdown-content a {
+/* Links inside the dropdown */
+.dropdown-content a {
     color: var(--secondary-color);
     padding: var(--global-whitespace-xs) var(--global-whitespace-sm);;
     text-decoration: none;
     display: block;
-  }
+}
   
-  /* Change color of dropdown links on hover */
-  .dropdown-content a:hover {background-color: var(--main-color-dark);}
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {background-color: var(--main-color-dark);}
   
-  /* Show the dropdown menu on hover */
-  .dropdown:hover .dropdown-content {display: block;}
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {display: block;}
   
-  /* Change the background color of the dropdown button when the dropdown content is shown */
-  .dropdown:hover .dropbtn {background-color: var(--main-color-dark);}
+/* Change the background color of the dropdown button when the dropdown content is shown */
+.dropdown:hover .dropbtn {background-color: var(--main-color-dark);}
 
 
-  input[type=text] {
+input[type=text] {
     border: none;
     border-bottom: 2px dotted var(--secondary-color);
     width: 80%;
-  }
+}
 
 .c-header {
     display: flex;
@@ -421,7 +402,6 @@ body {
     margin-top: 5em;
 }
 
-
 .container {
     display: grid;
     height: 95vh;
@@ -441,7 +421,6 @@ body {
     margin-top: var(--global-whitespace-sm);
 }
 
-
 .item {
     width:90%;
     height: 100%;
@@ -453,7 +432,7 @@ body {
     justify-content: center;
     align-items: center;
     
-  }
+}
 
 .item_sp{
     width:90%;
@@ -467,15 +446,12 @@ body {
     align-items: center;
 }
 
-
-
 .whitespace{
     padding-top: 50px;
 }
 .c-title{
     margin-top: var(--global-whitespace-lg);
 }
-
 
 .c-card {
     background-color: var(--third-color);
@@ -506,7 +482,6 @@ body {
     line-height: 16px;
     color: var(--secondary-color);
 }
-
 
 .c-input {
     -webkit-appearance: none;
@@ -550,7 +525,6 @@ body {
 .button-sp{
     position: static;
 }
-
 
 .c-button {
     font-size: 16px;
@@ -661,21 +635,22 @@ tr:nth-child(even) {
     button{
         margin: 0px;
     }
+
     .c-button-small
-{
-    font-size: 16px;
-    font-weight: 700;    
-    background-color: var(--main-color);
-    color: #fff;
-    padding: var(--global-whitespace-xs) var(--global-whitespace-sm);
-    line-height: 24px;
-    width: 50px;
-    outline: none;
-    border: none;
-    border-radius: var(--radius-lg);
-    margin: var(--global-whitespace-xxs);
-    margin-bottom: var(--global-whitespace-sm);
-}
+    {
+        font-size: 16px;
+        font-weight: 700;    
+        background-color: var(--main-color);
+        color: #fff;
+        padding: var(--global-whitespace-xs) var(--global-whitespace-sm);
+        line-height: 24px;
+        width: 50px;
+        outline: none;
+        border: none;
+        border-radius: var(--radius-lg);
+        margin: var(--global-whitespace-xxs);
+        margin-bottom: var(--global-whitespace-sm);
+    }
 }
 
 @media (min-width:374px){
@@ -714,18 +689,18 @@ tr:nth-child(even) {
     }
 
 
-.item_sp{
-    width:600px;
-    height: 96%;
-    border-radius: var(--radius);
-    background: var(--secondary-color);
-    text-align: center;
-    padding: auto;
-    padding: auto;  
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
+    .item_sp{
+        width:600px;
+        height: 96%;
+        border-radius: var(--radius);
+        background: var(--secondary-color);
+        text-align: center;
+        padding: auto;
+        padding: auto;  
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
 
     .small-table-body{
         height: 25vh;
