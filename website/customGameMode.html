@@ -54,19 +54,16 @@
           }
           
           // Declare variables to use in our functions below
-          
           let startTime;
           let elapsedTime = 0;
           let timerInterval;
           
           // Create function to modify innerHTML
-          
           function print(txt) {
             document.getElementById("display").innerHTML = txt;
           }
           
           // Create "start" and "pause"functions
-          
           function start() {
             startTime = Date.now() - elapsedTime;
             timerInterval = setInterval(function printTime() {
@@ -77,6 +74,5 @@
           }
          
           start();         
-         
     </script>
 </body>
