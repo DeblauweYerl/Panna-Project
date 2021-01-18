@@ -59,10 +59,21 @@ def start_multiplayer(data):
         mp = threading.Thread(target=multiplayer, args=[player_name, player2_name])
         mp.start()
 
+
+@socketio.on('F2B_stop_game')
+def stop_game():
+    end_current_game()
+
+
 @socketio.on('F2B_request_scoreboard')
 def request_scoreboard(data):
     difficulty = data['difficulty']
-    data = DataRepository.read_scoreboard(difficulty)
+    version = data['version']
+    if version == "full":
+        data = DataRepository.read_scoreboard(difficulty)
+    else:
+        data = DataRepository.read_limited_scoreboard(difficulty)
+    socketio.emit('B2F_scoreboard_data', data, broadcast=False)
 
 @socketio.on('F2B_end_singleplayer')
 def end_singleplayer(data):
@@ -76,14 +87,17 @@ def singleplayer(difficulty, player_name):
     playing = True
 
     total_bases = 10 + (int(difficulty) * 5)
+    print(f"total bases: {total_bases}")
     bases_completed = 0
-    while(bases_completed <= total_bases):
+    while bases_completed <= total_bases and playing == True:
+        print(f"completed: {bases_completed}")
         current_base = bases[random.randint(0, 3)]
         current_base.activate()
         current_base.check_for_hit()
         bases_completed += 1
-    socketio.emit('B2F_stop_game', broadcast=False)
-    playing = False
+    if playing == True:
+        socketio.emit('B2F_stop_game', broadcast=False)
+        playing = False
 
 
 def multiplayer(player1_name, player2_name):
@@ -104,7 +118,7 @@ def multiplayer(player1_name, player2_name):
     team_blue = []
     team_blue_score = 2
 
-    while team_red_score!=0 and team_blue_score!=0:
+    while team_red_score!=0 and team_blue_score!=0 and playing == True:
         for base in bases[0:2]:
             team_red.append(base.active)
         team_red_score = team_red.count(True)
@@ -127,15 +141,16 @@ def multiplayer(player1_name, player2_name):
         team_blue.clear()
         time.sleep(.01)
 
-    if team_red_score == 0:
-        socketio.emit('B2F_multiplayer_end', {'winner': player2_name})
-    else:
-        socketio.emit('B2F_multiplayer_end', {'winner': player1_name})
+    if playing == True:
+        if team_red_score == 0:
+            socketio.emit('B2F_stop_game', {'winner': player2_name})
+        else:
+            socketio.emit('B2F_stop_game', {'winner': player1_name})
+        end_current_game()
 
+def end_current_game():
+    global playing
     playing = False
-    deactivate_all_bases()
-
-def deactivate_all_bases():
     for base in bases:
         base.deactivate()
 
@@ -154,20 +169,13 @@ def game(gamemode, difficulty=0):
         sp.start()
 
 
+
 try:
     if __name__ == '__main__':
         socketio.run(app,host="192.168.0.26",port=5010, debug=True)
-    while True:
-        if playing == False:
-            gamemode = input("sp of mp?: ")
-            difficulty = ""
-            if gamemode == 'sp':
-                difficulty = int(input("gemakkelijk(0), gemiddeld(1) of moeilijk(2)?: "))
-            game(gamemode, difficulty)
 
 except KeyboardInterrupt:
     print("\nManually stopped program")
 
 finally:
     GPIO.cleanup()
-
