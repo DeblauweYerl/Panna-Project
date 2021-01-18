@@ -96,12 +96,17 @@ def singleplayer(difficulty, player_name):
     total_bases = 10 + (int(difficulty) * 5)
     print(f"total bases: {total_bases}")
     bases_completed = 0
-    while bases_completed <= total_bases and playing == True:
+    current_base_index = 4
+    previous_base_index = 4
+    while bases_completed < total_bases and playing == True:
         print(f"completed: {bases_completed}")
-        current_base = bases[random.randint(0, 3)]
+        while current_base_index == previous_base_index:
+            current_base_index = random.randint(0, 3)
+        current_base = bases[current_base_index]
         current_base.activate()
         current_base.check_for_hit()
         bases_completed += 1
+        previous_base_index = current_base_index
     if playing == True:
         socketio.emit('B2F_stop_game', broadcast=False)
         playing = False
