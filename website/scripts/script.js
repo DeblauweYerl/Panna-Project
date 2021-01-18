@@ -2,11 +2,13 @@
 let playername, button;
 const lanIP = `${window.location.hostname}:5010`; //ip adres automatisch opvragen met ${window.location.hostname}
 const socketio = io(lanIP);
-let scoreboard_select, scoreboard_moeilijkheidgraad, btn_start_singleplayer, singleplayer_naam, singleplayer_moeilijkheidgraad, btn_stop_singleplayer,end_singleplayer_text, btn_start_multiplayer, btn_stop_multiplayer, multiplayer_winner, playername1, playername2, btnMultiplayer;
+let scoreboard_select, scoreboard_moeilijkheidgraad,
+btn_start_singleplayer, singleplayer_naam, singleplayer_moeilijkheidgraad, btn_stop_singleplayer, end_singleplayer_text,
+btn_start_multiplayer, btn_stop_multiplayer, multiplayer_winner, playername1, playername2,
+btn_custom_stop, btns_custom;
+
 let singleplayer_tijd=0;
 
-//custom game mode buttons
-let btn_custom_stop, btn_custom_1, btn_custom_2, btn_custom_3 ,btn_custom_4, btn_custom_5, btn_custom_6, btn_custom_7, btn_custom_8;
 
 
 //LISTEN TO PAGES
@@ -19,13 +21,13 @@ const listenToSingleplayer=function(){
         //singleplayer starten
         singleplayer_naam = document.querySelector(".js-playername").value;
         singleplayer_moeilijkheidgraad= document.getElementById("js-singleplayer-select").options[document.getElementById("js-singleplayer-select").selectedIndex].value;
-        socketio.emit("F2B_start_singleplayer", {sp_name: singleplayer_naam, sp_difficulty: singleplayer_moeilijkheidgraad});
-        console.log(singleplayer_moeilijkheidgraad);
 
         if (singleplayer_moeilijkheidgraad == "-1"){
+            socketio.emit("F2B_start_training");
             window.location.href="customGameMode.html";
         }
         else {
+            socketio.emit("F2B_start_singleplayer", {sp_name: singleplayer_naam, sp_difficulty: singleplayer_moeilijkheidgraad});
             window.location.href="singleplayerGame.html";
         };
     });
@@ -58,32 +60,17 @@ const listenToSingleplayerGame=function(){
 };
 
 const listenToCustomGameMode= function(){
-    btn_custom_1.addEventListener("click", function() {
-        socketio.emit("F2B_ledselection", {led: 0});
-    });
-    btn_custom_2.addEventListener("click", function() {
-        socketio.emit("F2B_ledselection", {led: 1});
-    });
-    btn_custom_3.addEventListener("click", function() {
-        socketio.emit("F2B_ledselection", {led: 2});
-    });
-    btn_custom_4.addEventListener("click", function() {
-        socketio.emit("F2B_ledselection", {led: 3});
-    });
-    btn_custom_5.addEventListener("click", function() {
-        socketio.emit("F2B_ledselection", {led: 4});
-    });
-    btn_custom_6.addEventListener("click", function() {
-        socketio.emit("F2B_ledselection", {led: 5});
-    });
-    btn_custom_7.addEventListener("click", function() {
-        socketio.emit("F2B_ledselection", {led: 6});
-    });
-    btn_custom_8.addEventListener("click", function() {
-        socketio.emit("F2B_ledselection", {led: 7});
-    });
+    console.log(btns_custom);
+    socketio.emit("F2B_start_training");
+    for(let btn of btns_custom){
+        btn.addEventListener("click", function() {
+            socketio.emit("F2B_activate_base", {base: btn.value});
+            console.log(btn.value);
+        });
+    };
+
     btn_custom_stop.addEventListener("click", function() {
-        socketio.emit("F2B_custom_stop");
+        socketio.emit("F2B_stop_game");
         window.location.href=`singleplayer.html`;
     });
 };
@@ -165,16 +152,6 @@ const listenToMultiplayerGame = function () {
         let winner = data.winner;
         window.location.href=`winnerMultiplayer.html?winner=${winner}`
     });
-    // socketio.on('B2F_stop_game',function(msg){
-    //     console.log(`game stoppen`);
-    //     // tijd ophalen van de timer
-    //     singleplayer_tijd = document.querySelector(".js-time").textContent;
-    //     console.log(singleplayer_tijd);
-    //     socketio.emit("F2B_end_singleplayer", {time: singleplayer_tijd});
-
-    //     // navigeren naar endgameSingleplayer.html
-    //     window.location.href=`endgameSingleplayer.html?time=${singleplayer_tijd}`;
-    // });
 };
 const listenToEndgameMultiplayer = function() {
     const urlParams = new URLSearchParams(window.location.search);
@@ -224,15 +201,7 @@ const init = function () {
     btn_stop_multiplayer = document.querySelector('.js-stop-multiplayer');
     multiplayer_winner = document.querySelector('.js-winner')
 
-    //custom game mode buttons
-    btn_custom_1 = document.querySelector('.js-btn-1');
-    btn_custom_2 = document.querySelector('.js-btn-2');
-    btn_custom_3 = document.querySelector('.js-btn-3');
-    btn_custom_4 = document.querySelector('.js-btn-4');
-    btn_custom_5 = document.querySelector('.js-btn-5');
-    btn_custom_6 = document.querySelector('.js-btn-6');
-    btn_custom_7 = document.querySelector('.js-btn-7');
-    btn_custom_8 = document.querySelector('.js-btn-8');
+    //custom game mode
     btn_custom_stop = document.querySelector('.js-stop-game');
 
     loadSocketListeners();
@@ -249,7 +218,8 @@ const init = function () {
     else if(end_singleplayer_text!=null){
         listenToEndgameSingleplayer();
     }
-    else if(btn_custom_1!=null){
+    else if(btn_custom_stop!=null){
+    btns_custom = document.querySelectorAll('.js-btn-base');
         listenToCustomGameMode();
     }
     else if(btn_start_multiplayer!=null){
