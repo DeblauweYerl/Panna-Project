@@ -65,7 +65,13 @@
             startTime = Date.now() - elapsedTime;
             timerInterval = setInterval(function printTime() {
               elapsedTime = Date.now() - startTime;
+              console.log(elapsedTime)
               print(timeToString(elapsedTime));
+              if(elapsedTime>600000){           
+                window.location.href=`singleplayer.html`
+                alert('Time has expired, you will now be returned to the single player home screen')
+                clearInterval(timerInterval);     
+              }
             }, 10);
             showButton("PAUSE");
           }
