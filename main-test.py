@@ -59,6 +59,13 @@ def start_multiplayer(data):
         mp = threading.Thread(target=multiplayer, args=[player_name, player2_name])
         mp.start()
 
+@socketio.on('F2B_start_training')
+def start_training():
+    global playing
+    playing == True
+@socketio.on('F2B_activate_base')
+def activate_base(data):
+    bases[int(data['base'])].activate()
 
 @socketio.on('F2B_stop_game')
 def stop_game():
