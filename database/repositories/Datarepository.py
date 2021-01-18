@@ -12,7 +12,13 @@ class DataRepository:
 
     @staticmethod
     def read_scoreboard(difficulty):
-        sql = "SELECT DISTINCT PlayerName, Time FROM tblgame WHERE Difficulty = %s ORDER BY Time DESC"
+        sql = "SELECT PlayerName, Time FROM tblgame WHERE Difficulty = %s ORDER BY Time ASC"
+        params = [difficulty]
+        return Database.get_rows(sql, params)
+
+    @staticmethod
+    def read_limited_scoreboard(difficulty):
+        sql = "SELECT PlayerName, Time FROM tblgame WHERE Difficulty = %s ORDER BY Time ASC LIMIT 3"
         params = [difficulty]
         return Database.get_rows(sql, params)
 
