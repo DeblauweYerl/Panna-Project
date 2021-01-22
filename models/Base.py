@@ -17,8 +17,8 @@ class Base:
         while status_button == 1:
             status_button = GPIO.input(self.button.pin)
 
-    def activate(self, color='red'):
-        self.led.activate(color)
+    def activate(self):
+        self.led.activate()
         self.active = True
 
     def deactivate(self):
