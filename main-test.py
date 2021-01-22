@@ -98,6 +98,7 @@ def singleplayer(difficulty, player_name):
     playing = True
 
     total_bases = 10 + (int(difficulty) * 5)
+    print(f"total bases: {total_bases}")
     bases_completed = 0
     current_base_index = 4
     previous_base_index = 4
@@ -181,8 +182,6 @@ def end_current_game():
 #         player_name = str(input("Whats the name of the player \n"))
 #         sp = threading.Thread(target=singleplayer, args=[difficulty, player_name])
 #         sp.start()
-
-
 
 try:
     if __name__ == '__main__':
