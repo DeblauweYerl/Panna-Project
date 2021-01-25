@@ -15,8 +15,11 @@ from database.repositories.Datarepository import DataRepository
 
 GPIO.setmode(GPIO.BCM)
 
-leds = [Led(26), Led(19), Led(13), Led(6), Led(21), Led(20), Led(16), Led(12)]
-buttons = [Button(5), Button(0), Button(11), Button(9), Button(1), Button(7), Button(8), Button(25)]
+# leds = [Led(26), Led(19), Led(5), Led(0), Led(21), Led(20), Led(1), Led(7)]
+# buttons = [Button(13), Button(6), Button(11), Button(9), Button(16), Button(12), Button(8), Button(25)]
+
+leds = [Led(22), Led(27), Led(19), Led(26), Led(14), Led(15), Led(20), Led(21)]
+buttons = [Button(17), Button(4), Button(6), Button(13), Button(18), Button(23), Button(12), Button(16)]
 bases = []
 for led in leds:
     GPIO.output(led.pin, 0)
@@ -119,17 +122,15 @@ def multiplayer(player1_name, player2_name):
     global playing
     playing = True
 
-    #leds per team oplichten in de respectievelijke kleur
-    for base in bases[0:4]:
-        base.activate()
-    for base in bases[4:8]:
+    #leds oplichten
+    for base in bases[0:8]:
         base.activate()
 
     #puntentelling + punt versturen over socket
-    team_red_previous = [True, True]
+    team_red_score_previous = 4
     team_red = []
     team_red_score = 4
-    team_blue_previous = [True, True]
+    team_blue_score_previous = 4
     team_blue = []
     team_blue_score = 4
 
@@ -137,20 +138,20 @@ def multiplayer(player1_name, player2_name):
         for base in bases[0:4]:
             team_red.append(base.active)
         team_red_score = team_red.count(True)
-        if team_red != team_red_previous:
+        if team_red_score != team_red_score_previous:
             socketio.emit('B2F_multiplayer_score', {'team': 'red', 'score': team_red_score})
-            team_red_previous = team_red
+            team_red_score_previous -= 1
 
         for base in bases[4:8]:
             team_blue.append(base.active)
         team_blue_score = team_blue.count(True)
-        if team_blue != team_blue_previous:
+        if team_blue != team_blue_score_previous:
             socketio.emit('B2F_multiplayer_score', {'team': 'blue', 'score': team_blue_score})
-            team_blue_previous = team_blue
+            team_blue_score_previous -= 1
 
         team_red.clear()
         team_blue.clear()
-        time.sleep(.01)
+
 
     if playing == True:
         if team_red_score == 0:
@@ -186,10 +187,12 @@ def end_current_game():
 
 try:
     if __name__ == '__main__':
-        socketio.run(app,host="169.254.10.1",port=5010, debug=True)
+        socketio.run(app,host="192.168.0.26",port=5010, debug=True)
 
 except KeyboardInterrupt:
     print("\nManually stopped program")
 
 finally:
+    for base in bases:
+        base.deactivate()
     GPIO.cleanup()
