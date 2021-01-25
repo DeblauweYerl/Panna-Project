@@ -3,7 +3,7 @@ let playername, button;
 const lanIP = `${window.location.hostname}:5010`; //ip adres automatisch opvragen met ${window.location.hostname}
 const socketio = io(lanIP);
 let scoreboard_select, scoreboard_moeilijkheidgraad,
-btn_start_singleplayer, singleplayer_naam, singleplayer_moeilijkheidgraad, btn_stop_singleplayer, end_singleplayer_text,
+btn_start_singleplayer, singleplayer_naam, singleplayer_moeilijkheidgraad = 0, btn_stop_singleplayer, end_singleplayer_text, html_position,
 btn_start_multiplayer, btn_stop_multiplayer, multiplayer_winner, playername1, playername2,
 btn_custom_stop, btns_custom;
 
@@ -28,14 +28,13 @@ const listenToSingleplayer=function(){
         }
         else {
             socketio.emit("F2B_start_singleplayer", {sp_name: singleplayer_naam, sp_difficulty: singleplayer_moeilijkheidgraad});
-            window.location.href="singleplayerGame.html";
+            window.location.href=`singleplayerGame.html?name=${singleplayer_naam}&diff=${singleplayer_moeilijkheidgraad}`;
         };
     });
     scoreboard_select.addEventListener("click", function() {
-        scoreboard_moeilijkheidgraad = document.getElementById("js-singleplayer-select").options[document.getElementById("js-singleplayer-select").selectedIndex].value;
-        console.log(scoreboard_moeilijkheidgraad);
-        if(scoreboard_moeilijkheidgraad != "-1"){
-            socketio.emit("F2B_request_scoreboard", {version: "limited", difficulty: scoreboard_moeilijkheidgraad});
+        singleplayer_moeilijkheidgraad = document.getElementById("js-singleplayer-select").options[document.getElementById("js-singleplayer-select").selectedIndex].value;
+        if(singleplayer_moeilijkheidgraad != "-1"){
+            socketio.emit("F2B_request_scoreboard", {version: "limited", difficulty: singleplayer_moeilijkheidgraad});
         }
         else {
             document.querySelector(".js-scoreboard").innerHTML = "<tr><td>Geen scorebord beschikbaar</td></tr>"
@@ -44,6 +43,9 @@ const listenToSingleplayer=function(){
 };
 
 const listenToSingleplayerGame=function(){
+    const urlParams = new URLSearchParams(window.location.search);
+    const diff = urlParams.get('diff');
+    const name = urlParams.get('name');
     btn_stop_singleplayer.addEventListener("click", function() {
         window.location.href=`singleplayer.html`;
         socketio.emit('F2B_stop_game');
@@ -55,7 +57,21 @@ const listenToSingleplayerGame=function(){
         console.log(singleplayer_tijd);
         socketio.emit("F2B_end_singleplayer", {time: singleplayer_tijd});
         // navigeren naar endgameSingleplayer.html
-        window.location.href=`endgameSingleplayer.html?time=${singleplayer_tijd}`;
+        window.location.href=`endgameSingleplayer.html?name=${name}&diff=${diff}&time=${singleplayer_tijd}`;
+    });
+};
+
+const listenToEndgameSingleplayer= function(){
+    const urlParams = new URLSearchParams(window.location.search);
+    const diff = urlParams.get('diff');
+    const time = urlParams.get('time');
+    const name = urlParams.get('name');
+    document.querySelector('.js-end-time').innerHTML = `Je hebt het spel voltooid in ${time}`
+    socketio.emit("F2B_request_scoreboard", {version: "targeted", difficulty: diff, name: name, time: time})
+    socketio.on('B2F_scoreboard_data', function(data) {
+        console.log(data)
+        loadScoreboard(data, data[0].position+1)
+        html_position.innerHTML = data[0].position_general
     });
 };
 
@@ -75,12 +91,6 @@ const listenToCustomGameMode= function(){
     });
 };
 
-const listenToEndgameSingleplayer= function(){
-    const urlParams = new URLSearchParams(window.location.search);
-    const time = urlParams.get('time');
-    document.querySelector('.js-end-time').innerHTML = `Je hebt het spel voltooid in ${time}`
-};
-
 const listenToScoreboard= function(){
     socketio.emit("F2B_request_scoreboard", {version: "full", difficulty: "0"});
     socketio.on('B2F_scoreboard_data', function(data) {
@@ -93,11 +103,10 @@ const listenToScoreboard= function(){
     });
 };
 
-const loadScoreboard = function(jsonObject){
+const loadScoreboard = function(jsonObject, position = 1){
     console.log(jsonObject)
     let records = ''
     if(jsonObject.length != 0) {
-        let position = 1;
         for(const element of jsonObject){
             records +=
             `<tr>
@@ -216,6 +225,7 @@ const init = function () {
         listenToSingleplayerGame();
     }
     else if(end_singleplayer_text!=null){
+        html_position = document.querySelector('.js-position')
         listenToEndgameSingleplayer();
     }
     else if(btn_custom_stop!=null){

@@ -15,9 +15,6 @@ from database.repositories.Datarepository import DataRepository
 
 GPIO.setmode(GPIO.BCM)
 
-# leds = [Led(26), Led(19), Led(5), Led(0), Led(21), Led(20), Led(1), Led(7)]
-# buttons = [Button(13), Button(6), Button(11), Button(9), Button(16), Button(12), Button(8), Button(25)]
-
 leds = [Led(22), Led(27), Led(19), Led(26), Led(14), Led(15), Led(20), Led(21)]
 buttons = [Button(17), Button(4), Button(6), Button(13), Button(18), Button(23), Button(12), Button(16)]
 bases = []
@@ -77,6 +74,7 @@ def stop_game():
 
 @socketio.on('F2B_request_scoreboard')
 def request_scoreboard(data):
+    print(data)
     difficulty = data['difficulty']
     version = data['version']
     if version == "full":
@@ -84,10 +82,42 @@ def request_scoreboard(data):
     elif version == "limited":
         response_data = DataRepository.read_limited_scoreboard(difficulty)
     elif version == "targeted":
-        response_data = DataRepository.read_scoreboard(difficulty)
-        # response_data = get_surrounding_records(response_data, response_data[])
+        name = data['name']
+        time = data['time']
+        repo_data = DataRepository.read_scoreboard(difficulty)
+        response_data = get_surrounding_records(repo_data, name, time)
+        print(response_data)
         
     socketio.emit('B2F_scoreboard_data', response_data, broadcast=False)
+
+def get_surrounding_records(data, name, time):
+    index = 0
+    for record in data:
+        if record['PlayerName'] == name and record['Time'] == time:
+            position = index
+        index += 1
+    index = 0
+    length = len(data)
+    if position < 2:
+        if position == 0:
+            processed_data = data[position:position+3]
+        elif position == 1:
+            processed_data = data[position-1:position+3]
+        for record in processed_data:
+            record['position'] = index
+            index += 1
+    else:
+        if position == length-1:
+            processed_data = data[position-2:position+1]
+        elif position == length-2:
+            processed_data = data[position-2:position+2]
+        else:
+            processed_data = data[position-2:position+3]
+        for record in processed_data:
+            record['position'] = position - 2 + index
+            index += 1
+    processed_data[0]['position_general'] = position + 1
+    return processed_data
 
 @socketio.on('F2B_end_singleplayer')
 def end_singleplayer(data):
@@ -100,7 +130,7 @@ def singleplayer(difficulty, player_name):
     global playing
     playing = True
 
-    total_bases = 10 + (int(difficulty) * 5)
+    total_bases = 1 + (int(difficulty) * 5)
     bases_completed = 0
     current_base_index = 8
     previous_base_index = 8
@@ -166,23 +196,6 @@ def end_current_game():
     for base in bases:
         base.deactivate()
 
-# def get_surrounding_records(data):
-    
-
-
-# def game(gamemode, difficulty=0):
-#     global playing
-#     playing = True
-#     if gamemode == "mp":
-#         player1_name = str(input("Whats the name of player 1 \n"))
-#         player2_name = str(input("Whats the name of player 2 \n"))
-#         mp = threading.Thread(target=multiplayer, args=[player1_name, player2_name])
-#         mp.start()
-#     if gamemode == "sp":
-#         player_name = str(input("Whats the name of the player \n"))
-#         sp = threading.Thread(target=singleplayer, args=[difficulty, player_name])
-#         sp.start()
-
 
 
 try:
@@ -193,6 +206,4 @@ except KeyboardInterrupt:
     print("\nManually stopped program")
 
 finally:
-    for base in bases:
-        base.deactivate()
     GPIO.cleanup()
