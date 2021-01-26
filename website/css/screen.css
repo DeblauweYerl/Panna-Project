@@ -132,10 +132,10 @@ body {
     border-radius: var(--radius-lg);
     margin-bottom: var(--global-whitespace-sm);
 }
-
+/* 
 .fadeout{
-    -webkit-animation: fadeOut ease 2s;
-}
+    -webkit-animation: fadeOut ease-out 1s;
+} */
   
 /* Style the active class, and buttons on mouse-over */
 .active, .c-button:hover {
@@ -350,6 +350,20 @@ input[type=text] {
 .c-logo{
     max-width: 100%;
     max-height: 100%;
+}
+.c-logo-small{
+    margin-top: 20vh;
+    max-width: 60%;
+    max-height: 60%;
+}
+.c-logo-1{
+   display: block;
+}
+.c-logo-2{
+
+    display: flex;
+    align-items: center;
+
 }
 
 @media (min-width:992px) {
