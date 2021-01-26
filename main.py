@@ -130,12 +130,11 @@ def singleplayer(difficulty, player_name):
     global playing
     playing = True
 
-    total_bases = 1 + (int(difficulty) * 5)
+    total_bases = 10 + (int(difficulty) * 5)
     bases_completed = 0
     current_base_index = 8
     previous_base_index = 8
     while bases_completed < total_bases and playing == True:
-        print(f"completed: {bases_completed}")
         while current_base_index == previous_base_index:
             current_base_index = random.randint(0, 7)
         current_base = bases[current_base_index]
@@ -200,7 +199,7 @@ def end_current_game():
 
 try:
     if __name__ == '__main__':
-        socketio.run(app,host="192.168.0.26",port=5010, debug=True)
+        socketio.run(app,host="169.254.10.1",port=5010, debug=True)
 
 except KeyboardInterrupt:
     print("\nManually stopped program")
