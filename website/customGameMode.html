@@ -10,22 +10,28 @@
 </head>
 <body>
     <div class="container">
-        <div class="item_sp player1">
+        <div class="item player1">
+            <div class="stopwatch c-stopwatch-margin">               
+                <span class="time" id="display">00:00:00</span>      
             <div>
-                <h1 class= "c-title">TIJD</h1>
-                <div class="stopwatch">
-                    <div class="circle">
-                      <span class="time js-time" id="display">00:00:00</span>
-                    </div>
-                    <div class="controls">
-                    </div>
-                  </div>                
+            <div class="c-grid-buttons">
                 <div>
-                <input type="button" class=" btn c-button pauseButton js-pauze-timer" value="Pauze" ></input>
-                <input type="button" class=" btn c-button playButton js-continue-timer" value="Hervat"  ></input>
-                <input type="button" class=" btn c-button pauseButton js-stop-game-singleplayer"  value="Stop het spel"></input>
-              </div>
-    </div>  
+                    <input type="button"  class= "btn c-button-small js-btn-base" value="0"/>
+                    <input type="button"  class= "btn c-button-small js-btn-base" value="1"/>
+                    <input type="button"  class= "btn c-button-small js-btn-base" value="2"/>
+                    <input type="button"  class= "btn c-button-small js-btn-base" value="3"/>
+                </div>
+                <div>
+                    <input type="button"  class= "btn c-button-small js-btn-base" value="4"/>
+                    <input type="button"  class= "btn c-button-small js-btn-base" value="5"/>
+                    <input type="button"  class= "btn c-button-small js-btn-base" value="6"/>
+                    <input type="button"  class= "btn c-button-small js-btn-base" value="7"/>
+                </div>
+                
+            </div>
+            <input type="button"  class= "btn c-button js-stop-game" value="STOP GAME"/>
+        </div>
+    </div>
     <script>
         function timeToString(time) {
             let diffInHrs = time / 3600000;
@@ -48,54 +54,25 @@
           }
           
           // Declare variables to use in our functions below
-          
           let startTime;
           let elapsedTime = 0;
           let timerInterval;
           
           // Create function to modify innerHTML
-          
           function print(txt) {
             document.getElementById("display").innerHTML = txt;
           }
           
           // Create "start" and "pause"functions
-          
           function start() {
             startTime = Date.now() - elapsedTime;
             timerInterval = setInterval(function printTime() {
               elapsedTime = Date.now() - startTime;
-              console.log(elapsedTime)
               print(timeToString(elapsedTime));
-              if(elapsedTime>600000){           
-                window.location.href=`singleplayer.html`
-                alert('Time has expired, you will now be returned to the single player home screen')
-                clearInterval(timerInterval);     
-              }
             }, 10);
-            showButton("PAUSE");
+            // showButton("PAUSE");
           }
-          
-          function pause() {
-            clearInterval(timerInterval);
-            showButton("PLAY");
-          }
-
-          // Create function to display buttons
-          
-          function showButton(buttonKey) {
-            const buttonToShow = buttonKey === "PLAY" ? playButton : pauseButton;
-            const buttonToHide = buttonKey === "PLAY" ? pauseButton : playButton;
-            buttonToShow.style.display = "inline";
-            buttonToHide.style.display = "none";
-            
-          }
-          // Create event listeners
-          
-          let playButton = document.querySelector('.js-continue-timer');
-          let pauseButton = document.querySelector('.js-pauze-timer');
+         
           start();         
-          playButton.addEventListener("click", start);
-          pauseButton.addEventListener("click", pause);
     </script>
 </body>

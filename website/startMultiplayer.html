@@ -5,24 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/3.0.5/socket.io.js" integrity="sha512-2rUSTSAeOO02jF6eBqENNqPs1EohenJ5j+1dgDPdXSLz9nOlrr8DJk4zW/lDy8rjhGCSonW3Gx812XJQIKZKJQ==" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="css/screen.css">
-
+    <script src="scripts/script.js"></script>
     <title>Panna 360</title>
 </head>
 <body>
     <div class="container-for-3">
         <div class="item player1">
             <div  class="c-square-red">
-                <h1>Bob peeters</h1>
-                <h4>3</h4>
+                <h1 class="js-player1-name"></h1>
+                <h4 class="js-player1-score">2</h4>
             </div>   
         </div>
-
         <div class="item player1">
             <div class="c-square-blue">
-                <h1>Jean peeters</h1>
-                <h4>6</h4>
+                <h1 class="js-player2-name"></h1>
+                <h4 class="js-player2-score">2</h4>
             </div>
         </div>
     </div>  
-    <button class="align-button c-button-white" onclick="location.href='winnerMultiplayer.html';">Stop het spel</button>
+    <button class="align-button_mp c-button-white js-stop-multiplayer" onclick="location.href='winnerMultiplayer.html';">Stop het spel</button>
 </body>

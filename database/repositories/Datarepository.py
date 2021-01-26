@@ -1,4 +1,4 @@
-from Database import Database
+from .Database import Database
 
 class DataRepository:
     @staticmethod
@@ -11,23 +11,20 @@ class DataRepository:
 
 
     @staticmethod
-    def read_scoreboard_easy():
-        sql = "SELECT DISTINCT PlayerName, Time FROM tblGame WHERE Difficulty = 0 ORDER BY Time DESC"
-        return Database.get_rows(sql)
+    def read_scoreboard(difficulty):
+        sql = "SELECT PlayerName, Time FROM tblgame WHERE Difficulty = %s ORDER BY Time ASC"
+        params = [difficulty]
+        return Database.get_rows(sql, params)
 
     @staticmethod
-    def read_scoreboard_normal():
-        sql = "SELECT DISTINCT PlayerName, Time FROM tblGame WHERE Difficulty = 1 ORDER BY Time DESC"
-        return Database.get_rows(sql)
-
-    @staticmethod
-    def read_scoreboard_hard():
-        sql = "SELECT DISTINCT PlayerName, Time FROM tblGame WHERE Difficulty = 2 ORDER BY Time DESC"
-        return Database.get_rows(sql)
+    def read_limited_scoreboard(difficulty):
+        sql = "SELECT PlayerName, Time FROM tblgame WHERE Difficulty = %s ORDER BY Time ASC LIMIT 3"
+        params = [difficulty]
+        return Database.get_rows(sql, params)
 
 
     @staticmethod
     def insert_game(timestamp, player_name, difficulty, time):
-        sql = "INSERT INTO tblGame VALUES (%s,%s,%s,%s)"
+        sql = "INSERT INTO tblgame VALUES (%s,%s,%s,%s)"
         params = [timestamp, player_name, difficulty, time]
         return Database.execute_sql(sql, params)
